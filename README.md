@@ -4,8 +4,8 @@ hopes that the program will be applicable to other areas that benefit
 from 3D mapping and heat maps.
 
 ## Contents
-- [About] (#about)
-- [Packages] (#packages)
+- [About](#about)
+- [Packages](#packages)
 
 ## About
 Having previously been made aware of a similar project, but not having
