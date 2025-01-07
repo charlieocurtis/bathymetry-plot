@@ -44,3 +44,4 @@ Below is a JPEG image of the area that was selected, for clarity:
 - pandas - https://pandas.pydata.org/
 - pydoc - https://docs.python.org/3/library/pydoc.html
 - csv - https://docs.python.org/3/library/csv.html
+- pyqt - https://doc.qt.io/qtforpython-6/#
