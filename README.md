@@ -39,6 +39,7 @@ Below is a JPEG image of the area that was selected, for clarity:
 ![Cardigan Bay data area](./data/gebco_2024_n52.8999_s52.15_w-4.7859_e-4.0361_relief.jpeg)
 
 ## Packages
+Below, are the packages used to help create the project:
 - matplot - https://matplotlib.org/stable/
 - pathlib - https://docs.python.org/3/library/pathlib.html
 - pandas - https://pandas.pydata.org/
