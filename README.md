@@ -41,8 +41,6 @@ Below is a JPEG image of the area that was selected, for clarity:
 ## Packages
 Below, are the packages used to help create the project:
 - matplot - https://matplotlib.org/stable/
-- pathlib - https://docs.python.org/3/library/pathlib.html
 - pandas - https://pandas.pydata.org/
 - pydoc - https://docs.python.org/3/library/pydoc.html
-- csv - https://docs.python.org/3/library/csv.html
-- pyqt - https://doc.qt.io/qtforpython-6/#
+- tkinter - https://docs.python.org/3/library/tkinter.html
