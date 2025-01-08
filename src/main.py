@@ -36,20 +36,37 @@ def browse_files():
 
     # Change label contents
     show_path_label.configure(text="File Opened: " + filepath)
+    data_display.insert(END, read_data(filepath).to_string())
 
 
+# create tkinter window
 window = Tk()
 window.title('File Explorer')
 window.geometry("1500x800")
 
+# create widget to display selected file path
+show_path_label = Label(window,
+                        text="File Opened: ")
+# create button widget to allow browsing file system
 browse_file_button = Button(window,
                         text="Browse Files",
                         command=browse_files)
-show_path_label = Label(window,
-                        text="File Opened: ")
 
+# add scroll bars and text widget to view all collected data from selected file
+horizontal_scroll = Scrollbar(window, orient='horizontal')
+horizontal_scroll.pack(side=BOTTOM, fill=X)
+vertical_scroll = Scrollbar(window, orient='vertical')
+vertical_scroll.pack(side=RIGHT, fill=Y)
+data_display = Text(window,
+                    height=40, width=165, wrap=NONE, xscrollcommand=horizontal_scroll.set,
+                    yscrollcommand=vertical_scroll.set)
+vertical_scroll.config(command=data_display.yview)
+horizontal_scroll.config(command=data_display.xview)
+
+# render all widgets
 browse_file_button.place(x=25, y=25)
 show_path_label.place(x=100, y=28)
+data_display.place(x=100, y=60)
 
 
 if __name__ == "__main__":
