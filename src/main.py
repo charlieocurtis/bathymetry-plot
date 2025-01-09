@@ -1,8 +1,10 @@
 import pandas as pd
 from tkinter import *
 from tkinter import filedialog
+import plot
 
 filepath: str = ""
+
 
 def read_data(file_location: str):
     """
@@ -29,8 +31,7 @@ def browse_files():
     global filepath
     filepath = filedialog.askopenfilename(initialdir="/",
                                           title="Select a File",
-                                          filetypes=(("All files","*.*"),
-                                                     ("Text files","*.txt"),
+                                          filetypes=(("Text files","*.txt"),
                                                      ("ASCII files", "*.asc"),
                                                      ("CSV files", "*.csv")))
 
@@ -41,7 +42,7 @@ def browse_files():
 
 # create tkinter window
 window = Tk()
-window.title('File Explorer')
+window.title('BathPlot')
 window.geometry("1500x800")
 
 # create widget to display selected file path
@@ -51,6 +52,11 @@ show_path_label = Label(window,
 browse_file_button = Button(window,
                         text="Browse Files",
                         command=browse_files)
+# create button widget to generate plot of given data
+generate_plot_button = Button(window, text="Generate",
+                              fg="red", relief="groove", bg="light blue",
+                              height=2, width=20,
+                              command=plot.generate_plot_window)
 
 # add scroll bars and text widget to view all collected data from selected file
 horizontal_scroll = Scrollbar(window, orient='horizontal')
@@ -67,6 +73,7 @@ horizontal_scroll.config(command=data_display.xview)
 browse_file_button.place(x=25, y=25)
 show_path_label.place(x=100, y=28)
 data_display.place(x=100, y=60)
+generate_plot_button.place(x=1200, y=715)
 
 
 if __name__ == "__main__":
