@@ -3,8 +3,7 @@ from tkinter import *
 from tkinter import filedialog
 import plot
 
-filepath: str = ""
-
+active_file: str = ""
 
 def read_data(file_location: str):
     """
@@ -28,16 +27,31 @@ def browse_files():
 
     Returns:
     """
-    global filepath
-    filepath = filedialog.askopenfilename(initialdir="/",
-                                          title="Select a File",
-                                          filetypes=(("Text files","*.txt"),
-                                                     ("ASCII files", "*.asc"),
+    global active_file
+    file_location = filedialog.askopenfilename(initialdir="/",
+                                             title="Select a File",
+                                             filetypes=(("ASCII files", "*.asc"),
+                                                     ("Text files", "*.txt"),
                                                      ("CSV files", "*.csv")))
 
     # Change label contents
-    show_path_label.configure(text="File Opened: " + filepath)
-    data_display.insert(END, read_data(filepath).to_string())
+    show_path_label.configure(text="File Opened: " + file_location)
+    data_display.insert(END, read_data(file_location).to_string())
+    # set currently active file location
+    active_file = file_location
+
+
+
+def prompt_plot_generation(location):
+    """
+    Helper function to call function in plot module
+
+    Parameters:
+    - location: The location of the file to be opened
+
+    Returns:
+    """
+    plot.generate_plot(location)
 
 
 # create tkinter window
@@ -52,11 +66,11 @@ show_path_label = Label(window,
 browse_file_button = Button(window,
                         text="Browse Files",
                         command=browse_files)
-# create button widget to generate plot of given data
+# create button widget to generate plot of given dataframe
 generate_plot_button = Button(window, text="Generate",
                               fg="red", relief="groove", bg="light blue",
                               height=2, width=20,
-                              command=plot.generate_plot_window)
+                              command=lambda: [plot.generate_plot_window(), prompt_plot_generation(active_file)])
 
 # add scroll bars and text widget to view all collected data from selected file
 horizontal_scroll = Scrollbar(window, orient='horizontal')
