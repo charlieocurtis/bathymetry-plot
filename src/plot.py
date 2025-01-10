@@ -37,7 +37,8 @@ def generate_plot_window():
 
     # Plot the surface
     fig, ax = plt.subplots(subplot_kw={"projection": "3d"}, figsize=(10, 7))
-    ax.plot_surface(X, Y, Z, cmap=cm.coolwarm)
+    ax.plot_surface(X, Y, Z, cmap=cm.seismic)
+
 
     # allows rotating of the plot
     ax.view_init()
