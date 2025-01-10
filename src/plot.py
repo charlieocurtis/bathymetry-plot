@@ -43,6 +43,7 @@ def generate_plot_window():
            yticklabels=[],
            zticklabels=[])
 
+    ax.view_init()
     # creating the Tkinter canvas
     # containing the Matplotlib figure
     canvas = FigureCanvasTkAgg(fig, master=plot_window)
