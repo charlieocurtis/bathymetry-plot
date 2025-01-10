@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import filedialog
 import plot
 
-active_file: str = ""
+pass_plot_data = plot.plot_config
 
 def read_data(file_location: str):
     """
@@ -15,8 +15,8 @@ def read_data(file_location: str):
     Returns:
     A pandas dataframe of the read values
     """
-    data = pd.read_csv(filepath_or_buffer=file_location, sep=r" |\n", skiprows=6, header=None, engine="python")
-    return data
+    pass_plot_data.file_data = pd.read_csv(filepath_or_buffer=file_location, sep=r" |\n", skiprows=6, header=None, engine="python")
+    return pass_plot_data.file_data
 
 
 def browse_files():
@@ -27,31 +27,15 @@ def browse_files():
 
     Returns:
     """
-    global active_file
-    file_location = filedialog.askopenfilename(initialdir="/",
+    pass_plot_data.active_file = filedialog.askopenfilename(initialdir="/",
                                              title="Select a File",
                                              filetypes=(("ASCII files", "*.asc"),
                                                      ("Text files", "*.txt"),
                                                      ("CSV files", "*.csv")))
 
     # Change label contents
-    show_path_label.configure(text="File Opened: " + file_location)
-    data_display.insert(END, read_data(file_location).to_string())
-    # set currently active file location
-    active_file = file_location
-
-
-
-def prompt_plot_generation(location):
-    """
-    Helper function to call function in plot module
-
-    Parameters:
-    - location: The location of the file to be opened
-
-    Returns:
-    """
-    plot.generate_plot(location)
+    show_path_label.configure(text="File Opened: " + pass_plot_data.active_file)
+    data_display.insert(END, read_data(pass_plot_data.active_file).to_string())
 
 
 # create tkinter window
@@ -70,15 +54,14 @@ browse_file_button = Button(window,
 generate_plot_button = Button(window, text="Generate",
                               fg="red", relief="groove", bg="light blue",
                               height=2, width=20,
-                              command=lambda: [plot.generate_plot_window(), prompt_plot_generation(active_file)])
+                              command=plot.generate_plot_window)
 
 # add scroll bars and text widget to view all collected data from selected file
 horizontal_scroll = Scrollbar(window, orient='horizontal')
 horizontal_scroll.pack(side=BOTTOM, fill=X)
 vertical_scroll = Scrollbar(window, orient='vertical')
 vertical_scroll.pack(side=RIGHT, fill=Y)
-data_display = Text(window,
-                    height=40, width=165, wrap=NONE, xscrollcommand=horizontal_scroll.set,
+data_display = Text(window, height=40, width=165, wrap=NONE, xscrollcommand=horizontal_scroll.set,
                     yscrollcommand=vertical_scroll.set)
 vertical_scroll.config(command=data_display.yview)
 horizontal_scroll.config(command=data_display.xview)

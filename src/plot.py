@@ -1,13 +1,17 @@
-import tkinter
 from tkinter import *
 import pandas as pd
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 
+class PlotConfig:
+    active_file: str = ""
+    file_data: pd.DataFrame = pd.DataFrame()
+
+plot_config = PlotConfig()
 
 def generate_plot_window():
     """
-    Function to generate a new window containing a canvas to display plot once generated.
+    Function to generate a new window containing a matplot canvas and the plotted figure
 
     Parameters:
 
@@ -15,32 +19,34 @@ def generate_plot_window():
     """
     plot_window = Tk()
     plot_window.title('PLOT')
-    plot_window.geometry("900x600")
+    plot_window.geometry("1100x800")
 
-    canvas = Canvas(plot_window, width=850, height=550, bg='grey')
-    canvas.pack(anchor=tkinter.CENTER, expand=True)
+    # the figure that will contain the plot
+    figure = Figure(figsize=(10, 7), dpi=100)
 
-    # chart = tkinter.PhotoImage(file=generate_plot)
+    # list of squares
+    y = [i ** 2 for i in range(101)]
 
-    canvas.create_image(
-        (800, 500),
-        # image = chart
-    )
+    # adding the subplot
+    plot1 = figure.add_subplot(111)
+    # plotting the graph
+    plot1.plot(y)
 
-    plot_window.mainloop()
+    # creating the Tkinter canvas
+    # containing the Matplotlib figure
+    canvas = FigureCanvasTkAgg(figure, master=plot_window)
+    canvas.draw()
 
-def generate_plot(location):
-    """
-    Function to generate matplot image of data provided by collection in main module
+    # placing the canvas on the Tkinter window
+    canvas.get_tk_widget().pack()
 
-    Parameters:
-    - location: The location of the file to be opened
+    # creating the Matplotlib toolbar
+    toolbar = NavigationToolbar2Tk(canvas, plot_window)
+    toolbar.update()
 
-    Returns:
-    """
-    dataframe = pd.read_csv(filepath_or_buffer=location, sep=r" |\n", skiprows=6, header=None, engine="python")
-    print(dataframe)
+    # placing the toolbar on the Tkinter window
+    canvas.get_tk_widget().pack()
 
 
 if __name__=='__main__':
-    print("plot.py module imported")
+    generate_plot_window()
