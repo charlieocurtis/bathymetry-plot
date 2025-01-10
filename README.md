@@ -5,8 +5,8 @@ from 3D mapping and heat maps.
 
 ## Contents
 - [About](#about)
-- [Packages](#packages)
 - [The Data](#the-data)
+- [Packages](#packages)
 
 ## About
 Having previously been made aware of a similar project, but not having
