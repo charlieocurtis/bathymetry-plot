@@ -3,7 +3,9 @@ from tkinter import *
 from tkinter import filedialog
 import plot
 
+# instantiate 'main' version of 'PlotConfig' class to pass relevant data to plot
 pass_plot_data = plot.plot_config
+
 
 def read_data(file_location: str):
     """
@@ -44,19 +46,16 @@ window.title('BathPlot')
 window.geometry("1500x800")
 
 # create widget to display selected file path
-show_path_label = Label(window,
-                        text="File Opened: ")
+show_path_label = Label(window, text="File Opened: ")
+
 # create button widget to allow browsing file system
-browse_file_button = Button(window,
-                        text="Browse Files",
-                        command=browse_files)
+browse_file_button = Button(window,text="Browse Files", command=browse_files)
+
 # create button widget to generate plot of given dataframe
-generate_plot_button = Button(window, text="Generate",
-                              fg="red", relief="groove", bg="light blue",
-                              height=2, width=20,
+generate_plot_button = Button(window, text="Generate", fg="red", relief="groove", bg="light blue", height=2, width=20,
                               command=plot.generate_plot_window)
 
-# add scroll bars and text widget to view all collected data from selected file
+# add scroll bars and text widget to view ALL collected data from selected file
 horizontal_scroll = Scrollbar(window, orient='horizontal')
 horizontal_scroll.pack(side=BOTTOM, fill=X)
 vertical_scroll = Scrollbar(window, orient='vertical')
