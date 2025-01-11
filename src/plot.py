@@ -36,7 +36,7 @@ def generate_plot_window():
 
     plt.style.use('_mpl-gallery')
 
-    # Make data
+    # Make axes
     calculate_axis()
     x_ax, y_ax = np.meshgrid(plot_config.x_axis, plot_config.y_axis)
     z_ax = plot_config.file_data

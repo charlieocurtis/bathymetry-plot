@@ -44,3 +44,4 @@ Below, are the packages used to help create the project:
 - pandas - https://pandas.pydata.org/
 - pydoc - https://docs.python.org/3/library/pydoc.html
 - tkinter - https://docs.python.org/3/library/tkinter.html
+- numpy - https://numpy.org/
