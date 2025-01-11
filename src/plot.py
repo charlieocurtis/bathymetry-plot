@@ -42,8 +42,10 @@ def generate_plot_window():
     z_ax = plot_config.file_data
 
     # Plot the surface
-    fig, ax = plt.subplots(subplot_kw={"projection": "3d"}, figsize=(10, 7))
-    ax.plot_surface(x_ax, y_ax, z_ax, cmap=cm.PiYG)
+    fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+    fig.set_size_inches(10, 7, forward = True)
+    fig.set_dpi(100)
+    ax.plot_surface(x_ax, y_ax, z_ax, cmap="copper", antialiased=True)
 
     # allows rotating of the plot
     ax.view_init()
@@ -74,12 +76,11 @@ def calculate_axis():
     """
     global plot_config
 
-    x_axis = np.linspace(plot_config.end_lon, plot_config.start_lon, num=plot_config.file_data.shape[1])
-    y_axis = np.linspace(plot_config.end_lat, plot_config.start_lat, num=plot_config.file_data.shape[0])
+    x_axis = np.linspace(plot_config.end_lon, plot_config.start_lon, num=plot_config.file_data.shape[1]).tolist()
+    y_axis = np.linspace(plot_config.end_lat, plot_config.start_lat, num=plot_config.file_data.shape[0]).tolist()
 
-    plot_config.x_axis.append(x_axis)
-    plot_config.y_axis.append(y_axis)
-
+    plot_config.x_axis = x_axis
+    plot_config.y_axis = y_axis
 
 if __name__=='__main__':
     calculate_axis()
