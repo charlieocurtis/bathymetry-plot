@@ -1,20 +1,28 @@
 from tkinter import *
 import pandas as pd
-from matplotlib.figure import Figure
 from matplotlib import cm
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import numpy as np
 
+
 # class to hold relevant data collected from 'main'
 class PlotConfig:
     active_file: str = ""
     file_data: pd.DataFrame = pd.DataFrame()
+    start_lat: float = 0
+    end_lat: float = 0
+    start_lon: float = 0
+    end_lon: float = 0
+    x_axis = []
+    y_axis = []
+
 
 plot_config = PlotConfig()
 
 
 def generate_plot_window():
+    global plot_config
     """
     Function to generate a new window containing a matplot canvas and the plotted figure
 
@@ -29,16 +37,13 @@ def generate_plot_window():
     plt.style.use('_mpl-gallery')
 
     # Make data
-    X = np.arange(-5, 5, 0.25)
-    Y = np.arange(-5, 5, 0.25)
-    X, Y = np.meshgrid(X, Y)
-    R = np.sqrt(X ** 2 + Y ** 2)
-    Z = np.sin(R)
+    calculate_axis()
+    x_ax, y_ax = np.meshgrid(plot_config.x_axis, plot_config.y_axis)
+    z_ax = plot_config.file_data
 
     # Plot the surface
     fig, ax = plt.subplots(subplot_kw={"projection": "3d"}, figsize=(10, 7))
-    ax.plot_surface(X, Y, Z, cmap=cm.seismic)
-
+    ax.plot_surface(x_ax, y_ax, z_ax, cmap=cm.PiYG)
 
     # allows rotating of the plot
     ax.view_init()
@@ -59,5 +64,22 @@ def generate_plot_window():
     canvas.get_tk_widget().pack()
 
 
+def calculate_axis():
+    """
+    Function to calculate the axis values based on the latitude and longitude of the data
+
+    Parameters:
+
+    Returns:
+    """
+    global plot_config
+
+    x_axis = np.linspace(plot_config.end_lon, plot_config.start_lon, num=plot_config.file_data.shape[1])
+    y_axis = np.linspace(plot_config.end_lat, plot_config.start_lat, num=plot_config.file_data.shape[0])
+
+    plot_config.x_axis.append(x_axis)
+    plot_config.y_axis.append(y_axis)
+
+
 if __name__=='__main__':
-    generate_plot_window()
+    calculate_axis()

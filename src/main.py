@@ -4,7 +4,7 @@ from tkinter import filedialog
 import plot
 
 # instantiate 'main' version of 'PlotConfig' class to pass relevant data to plot
-pass_plot_data = plot.plot_config
+pass_plot_configs = plot.PlotConfig
 
 
 def read_data(file_location: str):
@@ -17,8 +17,10 @@ def read_data(file_location: str):
     Returns:
     A pandas dataframe of the read values
     """
-    pass_plot_data.file_data = pd.read_csv(filepath_or_buffer=file_location, sep=r" |\n", skiprows=6, header=None, engine="python")
-    return pass_plot_data.file_data
+    global pass_plot_configs
+    pass_plot_configs.file_data = pd.read_csv(filepath_or_buffer=file_location, sep=r" |\n", skiprows=6, header=None,
+                                              engine="python")
+    return pass_plot_configs.file_data
 
 
 def browse_files():
@@ -29,15 +31,49 @@ def browse_files():
 
     Returns:
     """
-    pass_plot_data.active_file = filedialog.askopenfilename(initialdir="/",
-                                             title="Select a File",
-                                             filetypes=(("ASCII files", "*.asc"),
+    global pass_plot_configs
+    pass_plot_configs.active_file = filedialog.askopenfilename(initialdir="/",
+                                                               title="Select a File",
+                                                               filetypes=(("ASCII files", "*.asc"),
                                                      ("Text files", "*.txt"),
                                                      ("CSV files", "*.csv")))
 
     # Change label contents
-    show_path_label.configure(text="File Opened: " + pass_plot_data.active_file)
-    data_display.insert(END, read_data(pass_plot_data.active_file).to_string())
+    show_path_label.configure(text="File Opened: " + pass_plot_configs.active_file)
+    data_display.insert(END, read_data(pass_plot_configs.active_file).to_string())
+
+
+def retrieve_coords():
+    """
+    Function to retrieve the Latitude and Longitude co-ordinates from the filename
+
+    Parameters:
+
+    Returns:
+    """
+    global pass_plot_configs
+    string_coords = pass_plot_configs.active_file.split("/")[-1][11:][:-4].split("_")
+    float_coords = []
+
+    for coord in string_coords:
+        float_coords.append(float(coord[1:]))
+
+    pass_plot_configs.start_lat = float_coords[0]
+    pass_plot_configs.end_lat = float_coords[1]
+    pass_plot_configs.start_lon = float_coords[2]
+    pass_plot_configs.end_lon = float_coords[3]
+
+
+def set_plot_config():
+    """
+    Helper function to assign the attributes in plot module version of pass_plot_configs equal to pass_plot_configs
+
+    Parameters:
+
+    Returns:
+    """
+    global pass_plot_configs
+    plot.plot_config = pass_plot_configs
 
 
 # create tkinter window
@@ -53,7 +89,7 @@ browse_file_button = Button(window,text="Browse Files", command=browse_files)
 
 # create button widget to generate plot of given dataframe
 generate_plot_button = Button(window, text="Generate", fg="red", relief="groove", bg="light blue", height=2, width=20,
-                              command=plot.generate_plot_window)
+                              command=lambda: [retrieve_coords(), set_plot_config(), plot.generate_plot_window()])
 
 # add scroll bars and text widget to view ALL collected data from selected file
 horizontal_scroll = Scrollbar(window, orient='horizontal')
