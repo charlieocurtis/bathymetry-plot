@@ -33,3 +33,16 @@ project.
 > to finish. I managed to plot a 3D mesh with ``Matplot``. But didn't have the time to
 > incorporate data from a loaded file, although it is now accessible by ``plot.py``.
 > A task for another day.
+
+> ## 11/02/2025
+> ### The First
+> Today saw alot of work finishing off the data transfer from ``main.py`` to ``plot.py``.
+> Crucially though, once this was complete. The day finished with the first plots generated
+> from raw data. Initially with the practice data of Cardigan Bay, plots were then generated
+> from other data sets to assess the ability of the program to read filenames. Both were
+> successful. There is however an issue with regenerating the plot once the window has been closed
+> (without loading fresh data). Now with an application that can run from start to finish
+> (albeit primitively) hopefully progress on adapting it and improving it will be swift.
+> Below is the first plot generated:
+
+![Cardigan Bay plot](../data/cardigan_bay_first_plot.svg)
