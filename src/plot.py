@@ -79,8 +79,6 @@ def calculate_axis():
     plot_config.x_axis = x_axis
     plot_config.y_axis = y_axis
 
-    print(type(plot_config.x_axis))
-    print(type(plot_config.y_axis))
 
 if __name__=='__main__':
     calculate_axis()

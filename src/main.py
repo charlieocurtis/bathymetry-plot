@@ -1,3 +1,4 @@
+import tkinter as tk
 import plot
 import numpy as np
 import sys
@@ -98,16 +99,16 @@ horizontal_scroll = Scrollbar(window, orient='horizontal')
 horizontal_scroll.pack(side=BOTTOM, fill=X)
 vertical_scroll = Scrollbar(window, orient='vertical')
 vertical_scroll.pack(side=RIGHT, fill=Y)
-data_display = Text(window, height=40, width=165, wrap=NONE, xscrollcommand=horizontal_scroll.set,
+data_display = Text(window, height=40, width=75, wrap=NONE, xscrollcommand=horizontal_scroll.set,
                     yscrollcommand=vertical_scroll.set)
 vertical_scroll.config(command=data_display.yview)
 horizontal_scroll.config(command=data_display.xview)
 
 # render all widgets
-browse_file_button.place(x=25, y=25)
-show_path_label.place(x=100, y=28)
-data_display.place(x=100, y=60)
-generate_plot_button.place(x=1200, y=715)
+browse_file_button.pack(expand=True)
+show_path_label.pack(expand=True)
+data_display.pack(expand=True)
+generate_plot_button.pack(side=tk.RIGHT, padx=20, pady=5)
 
 
 if __name__ == "__main__":
