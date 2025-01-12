@@ -34,7 +34,7 @@ project.
 > incorporate data from a loaded file, although it is now accessible by ``plot.py``.
 > A task for another day.
 
-> ## 11/02/2025
+> ## 11/01/2025
 > ### The First
 > Today saw alot of work finishing off the data transfer from ``main.py`` to ``plot.py``.
 > Crucially though, once this was complete. The day finished with the first plots generated
@@ -46,3 +46,9 @@ project.
 > Below is the first plot generated:
 
 ![Cardigan Bay plot](../data/cardigan_bay_first_plot.svg)
+
+> ## 12/01/2025
+> Did some small refinements, making the UI more responsive and easier to run on different
+> systems. Some functionality with the plots still doesn't work but also doesn't seem to tricky
+> to fix. Started thinking about what other options I want to add to the first window to allow
+> the user to customize the parameters for the plots they wish to generate.

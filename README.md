@@ -41,7 +41,7 @@ Below is a JPEG image of the area that was selected, for clarity:
 ## Packages
 Below, are the packages used to help create the project:
 - matplot - https://matplotlib.org/stable/
-- pandas - https://pandas.pydata.org/
 - pydoc - https://docs.python.org/3/library/pydoc.html
 - tkinter - https://docs.python.org/3/library/tkinter.html
 - numpy - https://numpy.org/
+- sys - https://docs.python.org/3/library/sys.html

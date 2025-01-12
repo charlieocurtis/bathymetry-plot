@@ -42,7 +42,7 @@ def generate_plot_window():
     fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
     fig.set_size_inches(10, 7, forward = True)
     fig.set_dpi(100)
-    ax.plot_surface(x_ax, y_ax, plot_config.file_data, cmap="copper", antialiased=True)
+    ax.plot_surface(x_ax, y_ax, plot_config.file_data, cmap="seismic", antialiased=True)
 
     # allows rotating of the plot
     ax.view_init()
