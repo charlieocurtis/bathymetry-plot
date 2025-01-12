@@ -6,6 +6,8 @@ from 3D mapping and heat maps.
 ## Contents
 - [About](#about)
 - [The Data](#the-data)
+- [Features](#features)
+- [Running the project](#running-the-project)
 - [Packages](#packages)
 
 ## About
@@ -37,6 +39,19 @@ a means of testing).
 Below is a JPEG image of the area that was selected, for clarity:
 
 ![Cardigan Bay data area](./data/gebco_2024_n52.8999_s52.15_w-4.7859_e-4.0361_relief.jpeg)
+
+## Features
+- #### Plotting of 3D mesh graphs:
+  - Plot a 3D map of the sea floor (or other similar data) and view it through a 360<sup>o</sup> rotation.
+
+## Running the project
+1. Download and unzip the project or run:
+    ```git clone https://github.com/charlieocurtis/bathymetry-plot.git```
+
+2. You can download your own data from [GEBCO](https://www.gebco.net/) or use the basic data that comes with the project
+located at ```~/data/gebco_2024_n52.8999_s52.15_w-4.7859_e-4.0361.asc```
+
+3. Run ```main.py```
 
 ## Packages
 Below, are the packages used to help create the project:
