@@ -1,7 +1,10 @@
-import pandas as pd
+import plot
+import numpy as np
+import sys
 from tkinter import *
 from tkinter import filedialog
-import plot
+
+np.set_printoptions(threshold=sys.maxsize)
 
 # instantiate 'main' version of 'PlotConfig' class to pass relevant data to plot
 pass_plot_configs = plot.PlotConfig
@@ -18,8 +21,7 @@ def read_data(file_location: str):
     A pandas dataframe of the read values
     """
     global pass_plot_configs
-    pass_plot_configs.file_data = pd.read_csv(filepath_or_buffer=file_location, sep=r" |\n", skiprows=6, header=None,
-                                              engine="python")
+    pass_plot_configs.file_data = np.loadtxt(file_location, dtype=int, skiprows=6)
     return pass_plot_configs.file_data
 
 
@@ -40,7 +42,7 @@ def browse_files():
 
     # Change label contents
     show_path_label.configure(text="File Opened: " + pass_plot_configs.active_file)
-    data_display.insert(END, read_data(pass_plot_configs.active_file).to_string())
+    data_display.insert(END, np.array2string(read_data(pass_plot_configs.active_file), separator=','))
 
 
 def retrieve_coords():

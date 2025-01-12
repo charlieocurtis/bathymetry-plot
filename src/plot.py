@@ -1,15 +1,13 @@
-from tkinter import *
-import pandas as pd
-from matplotlib import cm
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 import numpy as np
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
+from tkinter import *
 
 
 # class to hold relevant data collected from 'main'
 class PlotConfig:
     active_file: str = ""
-    file_data: pd.DataFrame = pd.DataFrame()
+    file_data: np.ndarray = []
     start_lat: float = 0
     end_lat: float = 0
     start_lon: float = 0
@@ -39,13 +37,12 @@ def generate_plot_window():
     # Make axes
     calculate_axis()
     x_ax, y_ax = np.meshgrid(plot_config.x_axis, plot_config.y_axis)
-    z_ax = plot_config.file_data
 
     # Plot the surface
     fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
     fig.set_size_inches(10, 7, forward = True)
     fig.set_dpi(100)
-    ax.plot_surface(x_ax, y_ax, z_ax, cmap="copper", antialiased=True)
+    ax.plot_surface(x_ax, y_ax, plot_config.file_data, cmap="copper", antialiased=True)
 
     # allows rotating of the plot
     ax.view_init()
@@ -81,6 +78,9 @@ def calculate_axis():
 
     plot_config.x_axis = x_axis
     plot_config.y_axis = y_axis
+
+    print(type(plot_config.x_axis))
+    print(type(plot_config.y_axis))
 
 if __name__=='__main__':
     calculate_axis()
