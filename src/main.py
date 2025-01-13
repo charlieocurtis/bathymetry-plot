@@ -1,6 +1,7 @@
 import plot
 import numpy as np
 import sys
+import customtkinter as ctk
 from tkinter import *
 from tkinter.ttk import Combobox
 from tkinter import filedialog
