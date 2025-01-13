@@ -56,6 +56,8 @@ def generate_plot_window():
     # allows rotating of the plot
     ax.view_init()
 
+    print(plot_config)
+
     if plot_config.show_axis_labels:
         plt.xlabel("Longitude")
         plt.ylabel("Latitude")

@@ -4,8 +4,6 @@ import sys
 import customtkinter as ctk
 from customtkinter import filedialog
 from tkinter import *
-from tkinter.ttk import Combobox
-from tkinter import filedialog
 
 np.set_printoptions(threshold=sys.maxsize)
 
@@ -39,8 +37,9 @@ def browse_files():
                                                      ("CSV files", "*.csv")))
 
     # Change label contents
-    show_path_label.configure(text="File Opened: " + plot.plot_config.active_file)
-    data_display.insert(END, np.array2string(read_data(plot.plot_config.active_file), separator=','))
+    file_location_label.configure(text="File Opened: " + plot.plot_config.active_file)
+    plot.plot_config.file_data = read_data(plot.plot_config.active_file)
+    loaded_data_display.insert(index='insert', text=plot.plot_config.file_data)
 
 
 def retrieve_coords():
@@ -64,53 +63,9 @@ def retrieve_coords():
 
 
 def set_custom_configs():
-    plot.plot_config.show_axis_labels = radio_var.get()
-    plot.plot_config.plot_color = combo_var.get()
+    plot.plot_config.show_axis_labels = axis_label_var.get()
+    plot.plot_config.plot_color = option_menu_var.get()
 
-# # create tkinter window
-# window = Tk()
-# window.title('BathPlot')
-# window.geometry("1500x800")
-#
-#
-# # create widget to display selected file path
-# show_path_label = Label(window, text="File Opened: ", wraplength=80)
-#
-# # create button widget to allow browsing file system
-# browse_file_button = Button(window,text="Browse Files", command=browse_files)
-#
-# # create button widget to generate plot of given dataframe
-# generate_plot_button = Button(window, text="Generate", fg="red", relief="groove", bg="light blue", height=2, width=20,
-#                               command=lambda: [retrieve_coords(), set_custom_configs(), plot.generate_plot_window()])
-#
-# # create prompt to request users input via radio buttons
-# axis_label_prompt = Label(window, text="Show axis labels?")
-# # create radio buttons to take the users input for customization
-# radio_var = IntVar()
-# # noinspection PyTypeChecker
-# axis_label_radio_true = Radiobutton(window, text="Yes", variable=radio_var, value=1)
-# # noinspection PyTypeChecker
-# axis_label_radio_false = Radiobutton(window, text="No", variable=radio_var, value=0)
-#
-# # create combo box to select plot color
-# combo_var = StringVar()
-# color_list = ["seismic", "copper"]
-# combo_box = Combobox(window, values=color_list, textvariable=combo_var)
-# combo_box.set("Select plot color: ")
-#
-#
-# # render all widgets in position
-# data_display = Text(window, height=40, width=75, wrap=NONE)
-# browse_file_button.grid(column=0, row=0, padx=40, pady=5)
-# show_path_label.grid(column=0, row=1, columnspan=3, padx=40, pady=5)
-# data_display.grid(column=3, row=0, rowspan=10, padx=5, pady=5)
-# generate_plot_button.grid(column=10, row=10, padx=5, pady=5)
-#
-# axis_label_prompt.grid(column=5, row=0, padx=5)
-# axis_label_radio_true.grid(column=5, row=1, padx=5)
-# axis_label_radio_false.grid(column=5, row=2, padx=5)
-#
-# combo_box.grid(column=6, row=0, padx=5, pady=5)
 
 app = ctk.CTk()
 app.title = "Bathymetry-Plot"
@@ -122,10 +77,39 @@ tabview.add("Customize Plot")
 tabview.set("Load Data")
 
 browse_file_button = ctk.CTkButton(master=tabview.tab("Load Data"), text="Browse Files", command=browse_files)
+file_location_label = ctk.CTkLabel(master=tabview.tab("Load Data"), text="Load a file to start")
+loaded_data_display = ctk.CTkTextbox(master=tabview.tab("Load Data"), width=1450, height=650, wrap='none')
 
 tabview.pack()
 browse_file_button.pack()
+file_location_label.pack()
+loaded_data_display.pack()
 
+axis_label_var = IntVar()
+axis_label_frame = ctk.CTkFrame(master=tabview.tab("Customize Plot"))
+axis_label_prompt = ctk.CTkLabel(master=axis_label_frame, text="Do you wish to show axis labels?")
+axis_label_true_option = ctk.CTkRadioButton(master=axis_label_frame, text="Yes", value=True,
+                                            variable=axis_label_var)
+axis_label_false_option = ctk.CTkRadioButton(master=axis_label_frame, text="No", value=False,
+                                             variable=axis_label_var)
+
+color_option_frame = ctk.CTkFrame(master=tabview.tab("Customize Plot"))
+color_label_prompt = ctk.CTkLabel(master=color_option_frame, text="Select a color scheme for the plot:")
+color_list = ["seismic", "copper"]
+option_menu_var = StringVar()
+color_option = ctk.CTkOptionMenu(master=color_option_frame, values=color_list, variable=option_menu_var)
+
+generate_plot_button = ctk.CTkButton(master=tabview.tab("Customize Plot"), width=1400, text="Generate Plot",
+                                command=lambda: [retrieve_coords(), set_custom_configs(), plot.generate_plot_window()])
+
+axis_label_frame.pack(anchor='w', padx=5)
+axis_label_prompt.pack()
+axis_label_true_option.pack(pady=5)
+axis_label_false_option.pack()
+color_option_frame.pack(anchor='w', padx=5, pady=20)
+color_label_prompt.pack()
+color_option.pack()
+generate_plot_button.pack(anchor='s',side="bottom", padx=5, pady=5)
 
 
 if __name__ == "__main__":
