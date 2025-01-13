@@ -1,4 +1,3 @@
-import tkinter as tk
 import plot
 import numpy as np
 import sys
@@ -85,6 +84,7 @@ window = Tk()
 window.title('BathPlot')
 window.geometry("1500x800")
 
+
 # create widget to display selected file path
 show_path_label = Label(window, text="File Opened: ", wraplength=80)
 
@@ -95,26 +95,26 @@ browse_file_button = Button(window,text="Browse Files", command=browse_files)
 generate_plot_button = Button(window, text="Generate", fg="red", relief="groove", bg="light blue", height=2, width=20,
                               command=lambda: [retrieve_coords(), set_plot_config(), plot.generate_plot_window()])
 
+# create prompt to request users input via radio buttons
 axis_label_prompt = Label(window, text="Show axis labels?")
-
+# create radio buttons to take the users input for customization
 radio_var = IntVar()
 # noinspection PyTypeChecker
 axis_label_radio_true = Radiobutton(window, text="Yes", variable=radio_var, value=1)
 # noinspection PyTypeChecker
 axis_label_radio_false = Radiobutton(window, text="No", variable=radio_var, value=0)
 
-# render all widgets
+
+# render all widgets in position
 data_display = Text(window, height=40, width=75, wrap=NONE)
 browse_file_button.grid(column=0, row=0, padx=40, pady=5)
 show_path_label.grid(column=0, row=1, columnspan=3, padx=40, pady=5)
 data_display.grid(column=3, row=0, rowspan=10, padx=5, pady=5)
 generate_plot_button.grid(column=10, row=10, padx=5, pady=5)
 
-axis_label_prompt.grid(column=5, row=0, padx=5, pady=5)
-axis_label_radio_true.grid(column=5, row=1, padx=5, pady=5)
-axis_label_radio_false.grid(column=5, row=2, padx=5, pady=5)
-window.mainloop()
-
+axis_label_prompt.grid(column=5, row=0, padx=5)
+axis_label_radio_true.grid(column=5, row=1, padx=5)
+axis_label_radio_false.grid(column=5, row=2, padx=5)
 
 
 if __name__ == "__main__":

@@ -8,22 +8,20 @@ from tkinter import *
 class PlotConfig:
     def __init__(self):
         self.active_file: str = ""
-        self.file_data: np.ndarray = []
+        self.file_data: np.ndarray = np.empty((0, 0), dtype=float)
         self.start_lat: float = 0
         self.end_lat: float = 0
         self.start_lon: float = 0
         self.end_lon: float = 0
-        self.x_axis = []
-        self.y_axis = []
-        self.show_axis_labels = None
+        self.x_axis: list[float] = []
+        self.y_axis: list[float] = []
+        self.show_axis_labels: int = 0
 
 
     def __str__(self):
         return (f"active_file: {self.active_file}\nstart_lat: {self.start_lat}\n"
                 f"end_lat: {self.end_lat}\nstart_lon: {self.start_lon}\nend_lon: {self.end_lon}\n"
                 f"x_axis: {self.x_axis}\ny_axis: {self.y_axis}\nshow_axis_labels: {self.show_axis_labels}")
-
-
 
 
 plot_config = PlotConfig()
@@ -96,4 +94,4 @@ def calculate_axis():
 
 
 if __name__=='__main__':
-    calculate_axis()
+    generate_plot_window()
