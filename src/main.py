@@ -8,7 +8,7 @@ from tkinter import filedialog
 np.set_printoptions(threshold=sys.maxsize)
 
 # instantiate 'main' version of 'PlotConfig' class to pass relevant data to plot
-pass_plot_configs = plot.PlotConfig
+pass_plot_configs = plot.PlotConfig()
 
 
 def read_data(file_location: str):
@@ -76,6 +76,7 @@ def set_plot_config():
     Returns:
     """
     global pass_plot_configs
+    pass_plot_configs.show_axis_labels = radio_var.get()
     plot.plot_config = pass_plot_configs
 
 
@@ -85,7 +86,7 @@ window.title('BathPlot')
 window.geometry("1500x800")
 
 # create widget to display selected file path
-show_path_label = Label(window, text="File Opened: ")
+show_path_label = Label(window, text="File Opened: ", wraplength=80)
 
 # create button widget to allow browsing file system
 browse_file_button = Button(window,text="Browse Files", command=browse_files)
@@ -94,21 +95,26 @@ browse_file_button = Button(window,text="Browse Files", command=browse_files)
 generate_plot_button = Button(window, text="Generate", fg="red", relief="groove", bg="light blue", height=2, width=20,
                               command=lambda: [retrieve_coords(), set_plot_config(), plot.generate_plot_window()])
 
-# add scroll bars and text widget to view ALL collected data from selected file
-horizontal_scroll = Scrollbar(window, orient='horizontal')
-horizontal_scroll.pack(side=BOTTOM, fill=X)
-vertical_scroll = Scrollbar(window, orient='vertical')
-vertical_scroll.pack(side=RIGHT, fill=Y)
-data_display = Text(window, height=40, width=75, wrap=NONE, xscrollcommand=horizontal_scroll.set,
-                    yscrollcommand=vertical_scroll.set)
-vertical_scroll.config(command=data_display.yview)
-horizontal_scroll.config(command=data_display.xview)
+axis_label_prompt = Label(window, text="Show axis labels?")
+
+radio_var = IntVar()
+# noinspection PyTypeChecker
+axis_label_radio_true = Radiobutton(window, text="Yes", variable=radio_var, value=1)
+# noinspection PyTypeChecker
+axis_label_radio_false = Radiobutton(window, text="No", variable=radio_var, value=0)
 
 # render all widgets
-browse_file_button.pack(expand=True)
-show_path_label.pack(expand=True)
-data_display.pack(expand=True)
-generate_plot_button.pack(side=tk.RIGHT, padx=20, pady=5)
+data_display = Text(window, height=40, width=75, wrap=NONE)
+browse_file_button.grid(column=0, row=0, padx=40, pady=5)
+show_path_label.grid(column=0, row=1, columnspan=3, padx=40, pady=5)
+data_display.grid(column=3, row=0, rowspan=10, padx=5, pady=5)
+generate_plot_button.grid(column=10, row=10, padx=5, pady=5)
+
+axis_label_prompt.grid(column=5, row=0, padx=5, pady=5)
+axis_label_radio_true.grid(column=5, row=1, padx=5, pady=5)
+axis_label_radio_false.grid(column=5, row=2, padx=5, pady=5)
+window.mainloop()
+
 
 
 if __name__ == "__main__":

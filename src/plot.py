@@ -6,14 +6,24 @@ from tkinter import *
 
 # class to hold relevant data collected from 'main'
 class PlotConfig:
-    active_file: str = ""
-    file_data: np.ndarray = []
-    start_lat: float = 0
-    end_lat: float = 0
-    start_lon: float = 0
-    end_lon: float = 0
-    x_axis = []
-    y_axis = []
+    def __init__(self):
+        self.active_file: str = ""
+        self.file_data: np.ndarray = []
+        self.start_lat: float = 0
+        self.end_lat: float = 0
+        self.start_lon: float = 0
+        self.end_lon: float = 0
+        self.x_axis = []
+        self.y_axis = []
+        self.show_axis_labels = None
+
+
+    def __str__(self):
+        return (f"active_file: {self.active_file}\nstart_lat: {self.start_lat}\n"
+                f"end_lat: {self.end_lat}\nstart_lon: {self.start_lon}\nend_lon: {self.end_lon}\n"
+                f"x_axis: {self.x_axis}\ny_axis: {self.y_axis}\nshow_axis_labels: {self.show_axis_labels}")
+
+
 
 
 plot_config = PlotConfig()
@@ -46,6 +56,11 @@ def generate_plot_window():
 
     # allows rotating of the plot
     ax.view_init()
+
+    if plot_config.show_axis_labels:
+        plt.xlabel("Longitude")
+        plt.ylabel("Latitude")
+        ax.set_zlabel("Depth (m)")
 
     # creating the Tkinter canvas
     # containing the Matplotlib figure
