@@ -6,9 +6,6 @@ from tkinter import filedialog
 
 np.set_printoptions(threshold=sys.maxsize)
 
-# instantiate 'main' version of 'PlotConfig' class to pass relevant data to plot
-pass_plot_configs = plot.PlotConfig()
-
 
 def read_data(file_location: str):
     """
@@ -20,9 +17,8 @@ def read_data(file_location: str):
     Returns:
     A pandas dataframe of the read values
     """
-    global pass_plot_configs
-    pass_plot_configs.file_data = np.loadtxt(file_location, dtype=int, skiprows=6)
-    return pass_plot_configs.file_data
+    plot.plot_config.file_data = np.loadtxt(file_location, dtype=int, skiprows=6)
+    return plot.plot_config.file_data
 
 
 def browse_files():
@@ -33,16 +29,15 @@ def browse_files():
 
     Returns:
     """
-    global pass_plot_configs
-    pass_plot_configs.active_file = filedialog.askopenfilename(initialdir="/",
+    plot.plot_config.active_file = filedialog.askopenfilename(initialdir="/",
                                                                title="Select a File",
                                                                filetypes=(("ASCII files", "*.asc"),
                                                      ("Text files", "*.txt"),
                                                      ("CSV files", "*.csv")))
 
     # Change label contents
-    show_path_label.configure(text="File Opened: " + pass_plot_configs.active_file)
-    data_display.insert(END, np.array2string(read_data(pass_plot_configs.active_file), separator=','))
+    show_path_label.configure(text="File Opened: " + plot.plot_config.active_file)
+    data_display.insert(END, np.array2string(read_data(plot.plot_config.active_file), separator=','))
 
 
 def retrieve_coords():
@@ -53,30 +48,20 @@ def retrieve_coords():
 
     Returns:
     """
-    global pass_plot_configs
-    string_coords = pass_plot_configs.active_file.split("/")[-1][11:][:-4].split("_")
+    string_coords = plot.plot_config.active_file.split("/")[-1][11:][:-4].split("_")
     float_coords = []
 
     for coord in string_coords:
         float_coords.append(float(coord[1:]))
 
-    pass_plot_configs.start_lat = float_coords[0]
-    pass_plot_configs.end_lat = float_coords[1]
-    pass_plot_configs.start_lon = float_coords[2]
-    pass_plot_configs.end_lon = float_coords[3]
+    plot.plot_config.start_lat = float_coords[0]
+    plot.plot_config.end_lat = float_coords[1]
+    plot.plot_config.start_lon = float_coords[2]
+    plot.plot_config.end_lon = float_coords[3]
 
 
-def set_plot_config():
-    """
-    Helper function to assign the attributes in plot module version of pass_plot_configs equal to pass_plot_configs
-
-    Parameters:
-
-    Returns:
-    """
-    global pass_plot_configs
-    pass_plot_configs.show_axis_labels = radio_var.get()
-    plot.plot_config = pass_plot_configs
+def set_custom_configs():
+    plot.plot_config.show_axis_labels = radio_var.get()
 
 
 # create tkinter window
@@ -93,7 +78,7 @@ browse_file_button = Button(window,text="Browse Files", command=browse_files)
 
 # create button widget to generate plot of given dataframe
 generate_plot_button = Button(window, text="Generate", fg="red", relief="groove", bg="light blue", height=2, width=20,
-                              command=lambda: [retrieve_coords(), set_plot_config(), plot.generate_plot_window()])
+                              command=lambda: [retrieve_coords(), set_custom_configs(), plot.generate_plot_window()])
 
 # create prompt to request users input via radio buttons
 axis_label_prompt = Label(window, text="Show axis labels?")
