@@ -2,6 +2,7 @@ import plot
 import numpy as np
 import sys
 from tkinter import *
+from tkinter.ttk import Combobox
 from tkinter import filedialog
 
 np.set_printoptions(threshold=sys.maxsize)
@@ -62,7 +63,7 @@ def retrieve_coords():
 
 def set_custom_configs():
     plot.plot_config.show_axis_labels = radio_var.get()
-
+    plot.plot_config.plot_color = combo_var.get()
 
 # create tkinter window
 window = Tk()
@@ -89,6 +90,12 @@ axis_label_radio_true = Radiobutton(window, text="Yes", variable=radio_var, valu
 # noinspection PyTypeChecker
 axis_label_radio_false = Radiobutton(window, text="No", variable=radio_var, value=0)
 
+# create combo box to select plot color
+combo_var = StringVar()
+color_list = ["seismic", "copper"]
+combo_box = Combobox(window, values=color_list, textvariable=combo_var)
+combo_box.set("Select plot color: ")
+
 
 # render all widgets in position
 data_display = Text(window, height=40, width=75, wrap=NONE)
@@ -100,6 +107,8 @@ generate_plot_button.grid(column=10, row=10, padx=5, pady=5)
 axis_label_prompt.grid(column=5, row=0, padx=5)
 axis_label_radio_true.grid(column=5, row=1, padx=5)
 axis_label_radio_false.grid(column=5, row=2, padx=5)
+
+combo_box.grid(column=6, row=0, padx=5, pady=5)
 
 
 if __name__ == "__main__":
