@@ -45,10 +45,26 @@ project.
 > (albeit primitively) hopefully progress on adapting it and improving it will be swift.
 > Below is the first plot generated:
 
-![Cardigan Bay plot](../data/cardigan_bay_first_plot.svg)
+![Cardigan Bay plot](../res/cardigan_bay_first_plot.svg)
 
 > ## 12/01/2025
 > Did some small refinements, making the UI more responsive and easier to run on different
 > systems. Some functionality with the plots still doesn't work but also doesn't seem to tricky
 > to fix. Started thinking about what other options I want to add to the first window to allow
 > the user to customize the parameters for the plots they wish to generate.
+
+> ## 13/01/2025
+> Spent alot of the day reworking the UI to CustomTkinter since it looks alot nicer. I managed
+> to get back to the state the project was in prior to the change which was the main task of
+> the day. Moreover, I started implementing customization options so the user can customize the 
+> output of the plot.
+
+> ## 14/01/2025
+> Today saw a doubling down on adding customization features. Largely to do with the type of
+> plot. Ultimately, this resulted in a second type of plot being an option for the user - contour
+> plots. These are 2-dimensional and as such not as complex to generate. A good development
+> from this would be to generate the plots on the same figure. Although this might mean that
+> the current interactive nature of the 3D plots when rendered on their own, won't be possible
+> when rendered together.
+
+![Cardiagan Bay contour](../res/example_contour.png)
