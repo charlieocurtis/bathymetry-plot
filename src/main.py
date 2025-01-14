@@ -65,6 +65,8 @@ def retrieve_coords():
 def set_custom_configs():
     plot.plot_config.show_axis_labels = axis_label_var.get()
     plot.plot_config.plot_color = option_menu_var.get()
+    plot.plot_config.save_plot = save_plot_var.get()
+    plot.plot_config.save_plot_extension = save_plot_extension_var.get()
 
 
 app = ctk.CTk()
@@ -99,6 +101,16 @@ color_list = ["seismic", "copper"]
 option_menu_var = StringVar()
 color_option = ctk.CTkOptionMenu(master=color_option_frame, values=color_list, variable=option_menu_var)
 
+save_plot_frame = ctk.CTkFrame(master=tabview.tab("Customize Plot"))
+save_plot_prompt = ctk.CTkLabel(master=save_plot_frame, text="Save the plot as an image:")
+save_plot_var = StringVar(value="off")
+save_plot_switch = ctk.CTkSwitch(master=save_plot_frame,text="", variable=save_plot_var, onvalue="on", offvalue="off")
+save_plot_extension_label = ctk.CTkLabel(master=save_plot_frame, text="File format:")
+plot_extensions = [".png", ".jpg", ".svg", ".pdf"]
+save_plot_extension_var = StringVar()
+save_plot_extension_option = ctk.CTkOptionMenu(master=save_plot_frame, values=plot_extensions,
+                                               variable=save_plot_extension_var)
+
 generate_plot_button = ctk.CTkButton(master=tabview.tab("Customize Plot"), width=1400, text="Generate Plot",
                                 command=lambda: [retrieve_coords(), set_custom_configs(), plot.generate_plot_window()])
 
@@ -109,6 +121,11 @@ axis_label_false_option.pack()
 color_option_frame.pack(anchor='w', padx=5, pady=20)
 color_label_prompt.pack()
 color_option.pack()
+save_plot_frame.pack(anchor="w", padx=5, pady=5)
+save_plot_prompt.pack()
+save_plot_switch.pack()
+save_plot_extension_label.pack()
+save_plot_extension_option.pack()
 generate_plot_button.pack(anchor='s',side="bottom", padx=5, pady=5)
 
 

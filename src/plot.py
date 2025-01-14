@@ -17,12 +17,16 @@ class PlotConfig:
         self.y_axis: list[float] = []
         self.show_axis_labels: int = 0
         self.plot_color: str = ""
+        self.save_plot: str = ""
+        self.save_plot_extension: str = ""
 
 
     def __str__(self):
         return (f"active_file: {self.active_file}\nstart_lat: {self.start_lat}\n"
                 f"end_lat: {self.end_lat}\nstart_lon: {self.start_lon}\nend_lon: {self.end_lon}\n"
-                f"x_axis: {self.x_axis}\ny_axis: {self.y_axis}\nshow_axis_labels: {self.show_axis_labels}")
+                f"x_axis: {self.x_axis}\ny_axis: {self.y_axis}\nshow_axis_labels: {self.show_axis_labels}\n"
+                f"plot_color: {self.plot_color}\nsave_plot: {self.save_plot}\n"
+                f"save_plot_extension: {self.save_plot_extension}")
 
 
 plot_config = PlotConfig()
@@ -41,8 +45,6 @@ def generate_plot_window():
     plot_window.title('PLOT')
     plot_window.geometry("1100x800")
 
-    plt.style.use('_mpl-gallery')
-
     # Make axes
     calculate_axis()
     x_ax, y_ax = np.meshgrid(plot_config.x_axis, plot_config.y_axis)
@@ -55,8 +57,6 @@ def generate_plot_window():
 
     # allows rotating of the plot
     ax.view_init()
-
-    print(plot_config)
 
     if plot_config.show_axis_labels:
         plt.xlabel("Longitude")
@@ -77,6 +77,9 @@ def generate_plot_window():
 
     # placing the toolbar on the Tkinter window
     canvas.get_tk_widget().pack()
+
+    if plot_config.save_plot == "on":
+        plt.savefig("../data/plot" + plot_config.save_plot_extension)
 
 
 def calculate_axis():
