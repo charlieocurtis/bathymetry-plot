@@ -27,7 +27,7 @@ class PlotConfig:
                 f"end_lat: {self.end_lat}\nstart_lon: {self.start_lon}\nend_lon: {self.end_lon}\n"
                 f"x_axis: {self.x_axis}\ny_axis: {self.y_axis}\nshow_axis_labels: {self.show_axis_labels}\n"
                 f"plot_color: {self.plot_color}\nsave_plot: {self.save_plot}\n"
-                f"save_plot_extension: {self.save_plot_extension}")
+                f"save_plot_extension: {self.save_plot_extension}\nplot_type: {self.plot_type}\n")
 
 
 plot_config = PlotConfig()
