@@ -54,10 +54,11 @@ project.
 > the user to customize the parameters for the plots they wish to generate.
 
 > ## 13/01/2025
-> Spent alot of the day reworking the UI to CustomTkinter since it looks alot nicer. I managed
-> to get back to the state the project was in prior to the change which was the main task of
-> the day. Moreover, I started implementing customization options so the user can customize the 
-> output of the plot.
+> Spent alot of the day optimising the ```PlotConfig()``` class as to avoid an
+> instantiation of the class in ```main.py```. In the afternoon I was reworking the UI to
+> CustomTkinter since it looks alot nicer. I managed to get back to the state the project was
+> in prior to the change which was the main task of the day. Moreover, I started implementing
+> customization options so the user can customize the output of the plot.
 
 > ## 14/01/2025
 > Today saw a doubling down on adding customization features. Largely to do with the type of
