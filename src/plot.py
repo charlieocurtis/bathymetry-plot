@@ -19,6 +19,7 @@ class PlotConfig:
         self.plot_color: str = ""
         self.save_plot: str = ""
         self.save_plot_extension: str = ""
+        self.plot_type: int = 0
 
 
     def __str__(self):
@@ -49,25 +50,23 @@ def generate_plot_window():
     calculate_axis()
     x_ax, y_ax = np.meshgrid(plot_config.x_axis, plot_config.y_axis)
 
-    # Plot the surface
-    fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+    if plot_config.plot_type == 1:
+        fig, ax = plt.subplots()
+        ax.contourf(x_ax, y_ax, plot_config.file_data, cmap=plot_config.plot_color)
+    else:
+        # Plot the surface
+        fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+        ax.plot_surface(x_ax, y_ax, plot_config.file_data, cmap=plot_config.plot_color, antialiased=True)
+        # allows the rotation of the plot
+        ax.view_init()
+
     fig.set_size_inches(10, 7, forward = True)
     fig.set_dpi(100)
-    ax.plot_surface(x_ax, y_ax, plot_config.file_data, cmap=plot_config.plot_color, antialiased=True)
-
-    # allows rotating of the plot
-    ax.view_init()
-
-    if plot_config.show_axis_labels:
-        plt.xlabel("Longitude")
-        plt.ylabel("Latitude")
-        ax.set_zlabel("Depth (m)")
 
     # creating the Tkinter canvas
     # containing the Matplotlib figure
     canvas = FigureCanvasTkAgg(fig, master=plot_window)
     canvas.draw()
-
     # placing the canvas on the Tkinter window
     canvas.get_tk_widget().pack()
 
@@ -78,8 +77,13 @@ def generate_plot_window():
     # placing the toolbar on the Tkinter window
     canvas.get_tk_widget().pack()
 
+    if plot_config.show_axis_labels:
+        plt.xlabel("Longitude")
+        plt.ylabel("Latitude")
+        ax.set_zlabel("Depth (m)")
+
     if plot_config.save_plot == "on":
-        plt.savefig("../data/plot" + plot_config.save_plot_extension)
+        plt.savefig("../data/plot" + plot_config.save_plot_extension, bbox_inches="tight")
 
 
 def calculate_axis():

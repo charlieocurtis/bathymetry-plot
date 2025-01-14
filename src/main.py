@@ -4,6 +4,7 @@ import sys
 import customtkinter as ctk
 from customtkinter import filedialog
 from tkinter import *
+from PIL import Image
 
 np.set_printoptions(threshold=sys.maxsize)
 
@@ -67,6 +68,7 @@ def set_custom_configs():
     plot.plot_config.plot_color = option_menu_var.get()
     plot.plot_config.save_plot = save_plot_var.get()
     plot.plot_config.save_plot_extension = save_plot_extension_var.get()
+    plot.plot_config.plot_type = plot_type_var.get()
 
 
 app = ctk.CTk()
@@ -111,22 +113,50 @@ save_plot_extension_var = StringVar()
 save_plot_extension_option = ctk.CTkOptionMenu(master=save_plot_frame, values=plot_extensions,
                                                variable=save_plot_extension_var)
 
+
+plot_type_frame = ctk.CTkFrame(master=tabview.tab("Customize Plot"))
+plot_type_prompt = ctk.CTkLabel(master=plot_type_frame, text="Select a plot type:")
+plot_type_var = IntVar()
+plot_type_radio_button_mesh = ctk.CTkRadioButton(master=plot_type_frame, text="3D Mesh plot", variable=plot_type_var,
+                                            value=0)
+plot_type_radio_button_contour = ctk.CTkRadioButton(master=plot_type_frame, text="2D Contour plot",
+                                            variable=plot_type_var, value=1)
+plot_type_examples_label = ctk.CTkLabel(master=plot_type_frame, text="Examples:")
+plot_tabs = ctk.CTkTabview(master=plot_type_frame, width=500, height=450)
+plot_tabs.add("3D Mesh plot")
+plot_tabs.add("2D Contour plot")
+plot_tabs.set("3D Mesh plot")
+mesh_plot_image = ctk.CTkImage(light_image=Image.open("../res/example_mesh.png"),
+                               dark_image=Image.open("../res/example_mesh.png"), size=(450, 400))
+contour_plot_image = ctk.CTkImage(light_image=Image.open("../res/example_contour.png"),
+                                  dark_image=Image.open("../res/example_contour.png"), size=(450, 400))
+mesh_plot_label = ctk.CTkLabel(master=plot_tabs.tab("3D Mesh plot"), text="", image=mesh_plot_image)
+contour_plot_label = ctk.CTkLabel(master=plot_tabs.tab("2D Contour plot"), text="", image=contour_plot_image)
+
 generate_plot_button = ctk.CTkButton(master=tabview.tab("Customize Plot"), width=1400, text="Generate Plot",
                                 command=lambda: [retrieve_coords(), set_custom_configs(), plot.generate_plot_window()])
 
-axis_label_frame.pack(anchor='w', padx=5)
+axis_label_frame.grid(row=0, column=0, padx=5, pady=5)
 axis_label_prompt.pack()
 axis_label_true_option.pack(pady=5)
 axis_label_false_option.pack()
-color_option_frame.pack(anchor='w', padx=5, pady=20)
+color_option_frame.grid(row=1, column=0, padx=5, pady=5)
 color_label_prompt.pack()
 color_option.pack()
-save_plot_frame.pack(anchor="w", padx=5, pady=5)
+save_plot_frame.grid(row=2, column=0, padx=5, pady=5)
 save_plot_prompt.pack()
 save_plot_switch.pack()
 save_plot_extension_label.pack()
 save_plot_extension_option.pack()
-generate_plot_button.pack(anchor='s',side="bottom", padx=5, pady=5)
+plot_type_frame.grid(row=0, column=1, padx=5, pady=5, rowspan=3)
+plot_type_prompt.pack()
+plot_type_radio_button_mesh.pack(pady=5)
+plot_type_radio_button_contour.pack()
+plot_type_examples_label.pack(pady=5)
+plot_tabs.pack()
+mesh_plot_label.pack()
+contour_plot_label.pack()
+generate_plot_button.grid(row=4, column=0, padx=5, pady=(100, 5), sticky="ew", columnspan=2)
 
 
 if __name__ == "__main__":
