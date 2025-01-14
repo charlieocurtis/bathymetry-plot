@@ -66,6 +66,7 @@ project.
 > plots. These are 2-dimensional and as such not as complex to generate. A good development
 > from this would be to generate the plots on the same figure. Although this might mean that
 > the current interactive nature of the 3D plots when rendered on their own, won't be possible
-> when rendered together.
+> when rendered together. Finally, I discovered Plotly, I hope to remove MatPlot and integrate
+> this instead, the plots are significantly improved.
 
 ![Cardiagan Bay contour](../res/example_contour.png)

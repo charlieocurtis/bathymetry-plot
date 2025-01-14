@@ -8,7 +8,7 @@ from tkinter import *
 class PlotConfig:
     def __init__(self):
         self.active_file: str = ""
-        self.file_data: np.ndarray = np.empty((0, 0), dtype=float)
+        self.file_data: np.ndarray = np.empty((0, 0), dtype=int)
         self.start_lat: float = 0
         self.end_lat: float = 0
         self.start_lon: float = 0
@@ -96,8 +96,8 @@ def calculate_axis():
     """
     global plot_config
 
-    x_axis = np.linspace(plot_config.end_lon, plot_config.start_lon, num=plot_config.file_data.shape[1]).tolist()
-    y_axis = np.linspace(plot_config.end_lat, plot_config.start_lat, num=plot_config.file_data.shape[0]).tolist()
+    x_axis = np.linspace(plot_config.start_lon, plot_config.end_lon, num=plot_config.file_data.shape[1]).tolist()
+    y_axis = np.linspace(plot_config.start_lat, plot_config.end_lat, num=plot_config.file_data.shape[0]).tolist()
 
     plot_config.x_axis = x_axis
     plot_config.y_axis = y_axis
