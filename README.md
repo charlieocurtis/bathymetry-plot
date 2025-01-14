@@ -60,3 +60,4 @@ Below, are the packages used to help create the project:
 - tkinter - https://docs.python.org/3/library/tkinter.html
 - numpy - https://numpy.org/
 - sys - https://docs.python.org/3/library/sys.html
+- customtkinter - https://customtkinter.tomschimansky.com/
