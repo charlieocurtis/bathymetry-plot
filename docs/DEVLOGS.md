@@ -70,3 +70,13 @@ project.
 > this instead, the plots are significantly improved.
 
 ![Cardiagan Bay contour](../res/example_contour.png)
+
+> ## 15/01/2025
+> I have decided to move forward with creating a web app, rather than a native one, using dash
+> and plotly. Firstly, the graphs are much nicer to use and look at, second, Tkinter allows
+> for the loading of webpages through one of its widgets. By creating a web version I can now
+> create, effectively two apps, a native/local download version, and a web version. In terms of
+> use-ability and distribution, this will be incredible. I have started researching what I can
+> save from the current state of the project, what needs to be re-written, and most importantly
+> how to start using dash to create the UI, and how to deploy it publicly at the conclusion of
+> development.
