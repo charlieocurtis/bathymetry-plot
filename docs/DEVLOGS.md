@@ -80,3 +80,10 @@ project.
 > save from the current state of the project, what needs to be re-written, and most importantly
 > how to start using dash to create the UI, and how to deploy it publicly at the conclusion of
 > development.
+
+> ## 16/01/2025
+> Started trialing, and implementing Dash and corresponding packages to develop a new web based
+> UI. Have made a very simple app at the moment, taking in user responses or as Dash refers to
+> it ```callbacks```. Having spent alot of time reading docs today, tomorrow will hopefully be
+> more about writing the actual UI, and starting to get it looking how I want it to. Does feel
+> like I am back to square one with just about everything.

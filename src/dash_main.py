@@ -1,6 +1,7 @@
 from dash import Dash, html, dcc, callback, Output, Input
 import plotly.graph_objects as go
 import numpy as np
+import dash_bootstrap_components as dbc
 
 app = Dash()
 
@@ -22,7 +23,7 @@ app.layout = [
     html.Div(children='My First App with Data, Graph, and Controls'),
     html.Hr(),
     dcc.RadioItems(options=list(plot_dict.keys()), value=list(plot_dict.keys())[0], id='controls-and-radio-item'),
-    dcc.Graph(figure={}, id="controls-and-graph")
+    dcc.Graph(figure={}, id='controls-and-graph')
 ]
 
 @callback(
