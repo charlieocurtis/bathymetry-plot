@@ -61,3 +61,5 @@ Below, are the packages used to help create the project:
 - numpy - https://numpy.org/
 - sys - https://docs.python.org/3/library/sys.html
 - customtkinter - https://customtkinter.tomschimansky.com/
+- dash - https://dash.plotly.com/installation
+- plotly - https://plotly.com/examples/

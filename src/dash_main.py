@@ -61,9 +61,8 @@ def get_file_location(filename, file_contents):
     global uploaded_data
     uploaded_file = filename
     selected_data = str(file_contents)[37:]
-    decoded = base64.b64decode(selected_data).decode('utf-8')
-    cleaned = decoded.strip().split('\n')
-    uploaded_data = np.loadtxt(cleaned, dtype=int, skiprows=6)
+    decoded = base64.b64decode(selected_data).decode('utf-8').strip().split('\n')
+    uploaded_data = np.loadtxt(decoded, dtype=int, skiprows=6)
     return uploaded_file, np.array2string(uploaded_data)
 
 # Run the app
