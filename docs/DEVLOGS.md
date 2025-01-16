@@ -90,3 +90,9 @@ project.
 > from local to webapp because Dash handles data in Binary. Simplest solution is to move the
 > data locally into the project directory, although this is not the solution I want or the one
 > that best serves the overall goals of the project.
+> 
+> <em>UPDATE: Today has been a late finish, I spent alot of the late afternoon/evening
+> working on reading ASCII files in the ```dcc.Upload()``` widget. This proved difficult
+> but at present the project is at a stage where ASCII files can be read by the app and
+> processed into Numpy ```ndarrays```. Yet to implement actually reading this data into a
+> plot.</em>
