@@ -101,7 +101,3 @@ def calculate_axis():
 
     plot_config.x_axis = x_axis
     plot_config.y_axis = y_axis
-
-
-if __name__=='__main__':
-    generate_plot_window()
