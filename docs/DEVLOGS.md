@@ -86,4 +86,7 @@ project.
 > UI. Have made a very simple app at the moment, taking in user responses or as Dash refers to
 > it ```callbacks```. Having spent alot of time reading docs today, tomorrow will hopefully be
 > more about writing the actual UI, and starting to get it looking how I want it to. Does feel
-> like I am back to square one with just about everything.
+> like I am back to square one with just about everything. Struggled alot with uploading data
+> from local to webapp because Dash handles data in Binary. Simplest solution is to move the
+> data locally into the project directory, although this is not the solution I want or the one
+> that best serves the overall goals of the project.
