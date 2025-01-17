@@ -10,6 +10,11 @@ class PlotConfig:
         self.filename: str = ""
         self.uploaded_data: np.ndarray = np.empty((0, 0), dtype=int)
         self.plot_types: list[str] = ["3D Surface", "2D Contour"]
+        self.start_lat: float = 0
+        self.end_lat: float = 0
+        self.start_lon: float = 0
+        self.end_lon: float = 0
+        self.current_fig: go.Figure() = None
 
 
 plot_config = PlotConfig()
@@ -17,11 +22,6 @@ plot_config = PlotConfig()
 
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 app = Dash(__name__, external_stylesheets=[dbc.themes.DARKLY, dbc_css])
-
-
-ALTERNATE_FILE = "C:\\Users\\Charlie\\Downloads\\GEBCO_14_Jan_2025_6b627da6f9d9\\gebco_2024_n36.1642_s35.7852_w-38.1665_e-37.1393.asc"
-with open(ALTERNATE_FILE, 'r') as file:
-    control_data = np.loadtxt(file, dtype=int, skiprows=6)
 
 
 # App layout
@@ -52,13 +52,22 @@ app.layout = dbc.Container([
     Input(component_id='dropdown_options', component_property='value')
 )
 def update_graph(plot_chosen):
-    global control_data
     if plot_chosen == '3D Surface':
-        fig = go.Figure(go.Surface(z=plot_config.uploaded_data))
+        fig = go.Figure(go.Surface(z=plot_config.uploaded_data,
+            x=np.linspace(plot_config.start_lon, plot_config.end_lon, num=plot_config.uploaded_data.shape[1]).tolist(),
+            y=np.linspace(plot_config.start_lat, plot_config.end_lat, num=plot_config.uploaded_data.shape[0]).tolist()))
+        fig.update_layout(
+            scene=dict(xaxis_title = "Longitude", yaxis_title = "Latitude", zaxis_title = "Depth (m above sea-level)"))
+        plot_config.current_fig = fig
     elif plot_chosen == '2D Contour':
-        fig = go.Figure(go.Surface(z=control_data))
+        fig = go.Figure(go.Contour(z=plot_config.uploaded_data,
+            x=np.linspace(plot_config.start_lon, plot_config.end_lon, num=plot_config.uploaded_data.shape[1]).tolist(),
+            y=np.linspace(plot_config.start_lat, plot_config.end_lat, num=plot_config.uploaded_data.shape[0]).tolist()))
+        fig.update_layout(xaxis_title = "Longitude", yaxis_title = "Latitude")
+        plot_config.current_fig = fig
     else:
         fig = go.Figure()
+        plot_config.current_fig = fig
     return fig
 
 
@@ -68,10 +77,25 @@ def update_graph(plot_chosen):
     [Input(component_id='upload_data_button', component_property='filename'),
      Input(component_id='upload_data_button', component_property='contents')]
 )
-def get_file_location(filename, file_contents):
+def grab_data_from_file(filename, file_contents):
+    # grab the raw data itself
     plot_config.filename = filename
     decoded = base64.b64decode(str(file_contents)[37:]).decode('utf-8').strip().split('\n')
     plot_config.uploaded_data = np.loadtxt(decoded, dtype=int, skiprows=6)
+
+    # grab the axis details from the filename
+    string_coords = plot_config.filename.split("/")[-1][11:][:-4].split("_")
+    float_coords = []
+
+    for coord in string_coords:
+        float_coords.append(float(coord[1:]))
+
+    # set the axis bounds to plot_config
+    plot_config.start_lat = float_coords[0]
+    plot_config.end_lat = float_coords[1]
+    plot_config.start_lon = float_coords[2]
+    plot_config.end_lon = float_coords[3]
+
     return plot_config.filename, np.array2string(plot_config.uploaded_data)
 
 

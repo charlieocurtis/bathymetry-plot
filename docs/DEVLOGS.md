@@ -101,10 +101,13 @@ project.
 > Implemented data reading from upload and can now generate a plot from the loaded data. I also
 > spent a large portion of the day learning Dash Bootstrap to style the app. It is now at a
 > primitive stage where it is looking <em>okay</em> and loading and reading data. The full
-> process from start to finish. The next step is implementing other functionality and testing
-> against other data sets (to make sure this isn't a fluke.)
+> process from start to finish. Also implemented the generation of 2D contour plots and have
+> tested this against other data sets. Noticed that only when I set the axis to be the correct
+> scale (i.e. latitude and longitude) did I see the <em>true</em> plot, show in the second image.
 
 ![First Dash Plot](../res/first_dash_plot.png)
+
+![Improved Plot](../res/refined_dash_plot.png)
 
 > P.S. Issue #8, although marked as ```wontfix``` has been now closed as complete. This is
 > because I came to the conclusion that this web app should be the primary version of the
