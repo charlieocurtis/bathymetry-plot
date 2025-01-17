@@ -14,8 +14,9 @@ class PlotConfig:
 
 plot_config = PlotConfig()
 
-EXTERNAL_STYLESHEETS = [dbc.themes.SPACELAB]
-app = Dash(__name__, external_stylesheets=EXTERNAL_STYLESHEETS)
+
+dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
+app = Dash(__name__, external_stylesheets=[dbc.themes.DARKLY, dbc_css])
 
 
 ALTERNATE_FILE = "C:\\Users\\Charlie\\Downloads\\GEBCO_14_Jan_2025_6b627da6f9d9\\gebco_2024_n36.1642_s35.7852_w-38.1665_e-37.1393.asc"
@@ -24,20 +25,26 @@ with open(ALTERNATE_FILE, 'r') as file:
 
 
 # App layout
-app.layout = [
-    html.H1("Bathymetry-Plot"),
-    html.Hr(),
-    html.H3("Upload File:"),
-    dcc.Upload(html.Button("Upload File"), id="upload_data_button"),
-    html.Div(id="uploaded_filename"),
-    html.Br(),
-    html.H3("Data Snippet:"),
-    html.Div(id='recovered_data'),
-    html.Br(),
-    html.H3("Plot Type: "),
-    dcc.Dropdown(options=plot_config.plot_types, id='dropdown_options'),
-    dcc.Graph(figure={}, id='controls-and-graph')
-]
+app.layout = dbc.Container([
+    dbc.Row([html.H1("Bathymetry-Plot"), html.Hr()]),
+    dbc.Row([
+        dbc.Col([
+            html.H3("1. Upload File:"),
+            dcc.Upload(dbc.Button("Upload File"), id="upload_data_button", className="dbc"),
+            html.Br(),
+            html.Div(id="uploaded_filename"),
+            html.Br(),
+            html.H3("2. Data Snippet:"),
+            html.Div(id='recovered_data'),
+            html.Br(),
+            html.H3("3. Plot Type: "),
+            dcc.Dropdown(options=plot_config.plot_types, id='dropdown_options', className="dbc"),
+        ], width=3),
+        dbc.Col([
+            dcc.Graph(figure={}, id='controls-and-graph', className="dbc", style={'height': '85vh'})
+        ], className="dbc"),
+    ])
+])
 
 
 @callback(
