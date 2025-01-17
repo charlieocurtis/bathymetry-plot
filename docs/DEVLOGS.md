@@ -105,3 +105,10 @@ project.
 > against other data sets (to make sure this isn't a fluke.)
 
 ![First Dash Plot](../res/first_dash_plot.png)
+
+> P.S. Issue #8, although marked as ```wontfix``` has been now closed as complete. This is
+> because I came to the conclusion that this web app should be the primary version of the
+> app. As such, waiting for the native version to be completed first would not be the right
+> approach. The web app better meets the initial goals of the project and with its
+> development to this stage. Proves that it can be further developed to be, the main crux
+> of this project.
