@@ -96,3 +96,12 @@ project.
 > but at present the project is at a stage where ASCII files can be read by the app and
 > processed into Numpy ```ndarrays```. Yet to implement actually reading this data into a
 > plot.</em>
+
+> ## 17/01/2025
+> Implemented data reading from upload and can now generate a plot from the loaded data. I also
+> spent a large portion of the day learning Dash Bootstrap to style the app. It is now at a
+> primitive stage where it is looking <em>okay</em> and loading and reading data. The full
+> process from start to finish. The next step is implementing other functionality and testing
+> against other data sets (to make sure this isn't a fluke.)
+
+![First Dash Plot](../res/first_dash_plot.png)

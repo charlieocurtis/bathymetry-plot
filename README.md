@@ -63,3 +63,4 @@ Below, are the packages used to help create the project:
 - customtkinter - https://customtkinter.tomschimansky.com/
 - dash - https://dash.plotly.com/installation
 - plotly - https://plotly.com/examples/
+- dash bootstrap components - https://dash-bootstrap-components.opensource.faculty.ai/
