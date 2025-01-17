@@ -1,7 +1,6 @@
 # Bathymetry Plot
-Program to plot and visualise Bathymetric Data. Featuring a GUI with the
-hopes that the program will be applicable to other areas that benefit
-from 3D mapping and heat maps.
+This is an application to plot and visualise Bathymetric Data. Featuring a GUI with the hopes
+that the program will be applicable to other areas that benefit from 3D mapping and heat maps.
 
 ## Contents
 - [About](#about)
@@ -41,8 +40,17 @@ Below is a JPEG image of the area that was selected, for clarity:
 ![Cardigan Bay data area](./data/gebco_2024_n52.8999_s52.15_w-4.7859_e-4.0361_relief.jpeg)
 
 ## Features
-- #### Plotting of 3D mesh graphs:
+- #### Choice of access/format of application
+  - Application has both a native version and a web based application. Both perform similar tasks
+  just using different packages and resources to achieve similar results.
+- #### Plotting of 3D data:
   - Plot a 3D map of the sea floor (or other similar data) and view it through a 360<sup>o</sup> rotation.
+  - Can be done in both the native and web apps
+- #### Plotting of 2D data:
+  - Data can also be visualised in the form of a contour map of the area depicted in the dataset.
+  Again, in both versions of the app.
+- #### Saving plots as images:
+  - The native app supports saving plots to local as images of various filetypes.
 
 ## Running the project
 1. Download and unzip the project or run:
@@ -55,12 +63,20 @@ located at ```~/data/gebco_2024_n52.8999_s52.15_w-4.7859_e-4.0361.asc```
 
 ## Packages
 Below, are the packages used to help create the project:
-- matplot - https://matplotlib.org/stable/
-- pydoc - https://docs.python.org/3/library/pydoc.html
-- tkinter - https://docs.python.org/3/library/tkinter.html
+
+Packages **REQUIRED FOR BOTH** versions:
 - numpy - https://numpy.org/
+- pydoc - https://docs.python.org/3/library/pydoc.html
+
+Packages **REQUIRED FOR NATIVE** version:
+- matplot - https://matplotlib.org/stable/
+- tkinter - https://docs.python.org/3/library/tkinter.html
 - sys - https://docs.python.org/3/library/sys.html
 - customtkinter - https://customtkinter.tomschimansky.com/
+- pil - https://pypi.org/project/pillow/
+
+Packages **REQUIRED FOR WEB** version:
 - dash - https://dash.plotly.com/installation
 - plotly - https://plotly.com/examples/
 - dash bootstrap components - https://dash-bootstrap-components.opensource.faculty.ai/
+- base64 - https://docs.python.org/3/library/base64.html
