@@ -21,16 +21,25 @@ plot_config = PlotConfig()
 
 
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
-app = Dash(__name__, external_stylesheets=[dbc.themes.DARKLY, dbc_css])
+app = Dash(__name__, external_stylesheets=[dbc.themes.ZEPHYR, dbc_css])
 
 
 # App layout
 app.layout = dbc.Container([
-    dbc.Row([html.H1("Bathymetry-Plot"), html.Hr()]),
+    dbc.Row([
+        dbc.Col([
+            html.H1("Bathymetry-Plot")
+        ], className="text-center"),
+    ], className=""),
     dbc.Row([
         dbc.Col([
             html.H3("1. Upload File:"),
-            dcc.Upload(dbc.Button("Upload File"), id="upload_data_button", className="dbc"),
+            dcc.Upload(dbc.Button("Upload File", className="btn btn-primary"), id="upload_data_button"),
+            html.Div(dcc.Markdown('''
+                Currently supported file types: 
+                
+                (.asc downloaded from [GEBCO](https://www.gebco.net/))
+            ''')),
             html.Br(),
             html.Div(id="uploaded_filename"),
             html.Br(),
@@ -38,13 +47,13 @@ app.layout = dbc.Container([
             html.Div(id='recovered_data'),
             html.Br(),
             html.H3("3. Plot Type: "),
-            dcc.Dropdown(options=plot_config.plot_types, id='dropdown_options', className="dbc"),
-        ], width=3),
+            dcc.Dropdown(options=plot_config.plot_types, id='dropdown_options'),
+        ], className="bg-primary bg-opacity-50 border border-primary border rounded-end", width=2),
         dbc.Col([
-            dcc.Graph(figure={}, id='controls-and-graph', className="dbc", style={'height': '85vh'})
-        ], className="dbc"),
-    ])
-])
+            dcc.Graph(figure={}, id='controls-and-graph', style={'height': '90vh'})
+        ], className="px-1", width=10),
+    ], className=""),
+], className="dbc text-dark", fluid=True)
 
 
 @callback(
