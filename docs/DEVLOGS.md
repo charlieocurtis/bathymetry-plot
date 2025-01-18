@@ -115,3 +115,8 @@ project.
 > approach. The web app better meets the initial goals of the project and with its
 > development to this stage. Proves that it can be further developed to be, the main crux
 > of this project.
+
+> ## 18/01/2025
+> Spent the day getting to grips with Bootstrap, making the app look a bit nicer and in turn
+> making it a bit more use-able. Finished with a basic setup whilst maintaining the current
+> level of functionality.
