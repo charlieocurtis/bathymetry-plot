@@ -8,6 +8,7 @@ that the program will be applicable to other areas that benefit from 3D mapping 
 - [Features](#features)
 - [Running the project](#running-the-project)
 - [Packages](#packages)
+- [Issues](#issues)
 
 ## About
 Having previously been made aware of a similar project, but not having
@@ -80,3 +81,8 @@ Packages **REQUIRED FOR WEB** version:
 - plotly - https://plotly.com/examples/
 - dash bootstrap components - https://dash-bootstrap-components.opensource.faculty.ai/
 - base64 - https://docs.python.org/3/library/base64.html
+
+## Issues
+To maintain a distinction, issues have been marked with either an NA (Native Application) or
+WA (Web Application) notation. This is in order to distinguish which version of the program the
+issue relates to.
