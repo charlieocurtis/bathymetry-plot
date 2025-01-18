@@ -85,4 +85,4 @@ Packages **REQUIRED FOR WEB** version:
 ## Issues
 To maintain a distinction, issues have been marked with either an NA (Native Application) or
 WA (Web Application) notation. This is in order to distinguish which version of the program the
-issue relates to.
+issue relates to. If the issue applies to both versions, the notation has been foregone.
