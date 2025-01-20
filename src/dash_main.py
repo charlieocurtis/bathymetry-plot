@@ -21,7 +21,8 @@ plot_config = PlotConfig()
 
 
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
-app = Dash(__name__, external_stylesheets=[dbc.themes.ZEPHYR, dbc_css])
+app = Dash(__name__, external_stylesheets=[dbc.themes.ZEPHYR, dbc_css,
+                                           'https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'])
 
 
 # App layout
@@ -29,8 +30,13 @@ app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([
             html.H1("Bathymetry-Plot")
-        ], className="text-center"),
-    ], className=""),
+        ], className="dbc", width=10),
+        dbc.Col([
+            html.Div(dcc.Markdown('''
+            source code written [by charlie](https://github.com/charlieocurtis/bathymetry-plot)
+            '''), id='author-tag')
+        ], className = "dbc text-center", width=2),
+    ], className="dbc"),
     dbc.Row([
         dbc.Col([
             html.H3("1. Upload File:"),
@@ -50,9 +56,10 @@ app.layout = dbc.Container([
             dcc.Dropdown(options=plot_config.plot_types, id='dropdown_options'),
         ], className="bg-primary bg-opacity-50 border border-primary border rounded-end", width=2),
         dbc.Col([
-            dcc.Graph(figure={}, id='controls-and-graph', style={'height': '90vh'})
+            dcc.Graph(figure={}, id='controls-and-graph', style={'height': '90vh'},
+                      className="dbc border border-primary border rounded"),
         ], className="px-1", width=10),
-    ], className=""),
+    ], className="dbc"),
 ], className="dbc text-dark", fluid=True)
 
 
