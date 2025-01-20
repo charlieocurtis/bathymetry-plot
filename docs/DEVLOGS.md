@@ -120,3 +120,11 @@ project.
 > Spent the day getting to grips with Bootstrap, making the app look a bit nicer and in turn
 > making it a bit more use-able. Finished with a basic setup whilst maintaining the current
 > level of functionality.
+
+> ## 20/01/2025
+> Did some more styling on the web application. Other than this there was alot of 'admin' - re-writting
+> README, writing PyDocs etc. Also looked into WSGI servers for Dash, however since at this stage I won't
+> be publishing the project to the internet via a site of its own/embedding in another, I decided this
+> wasn't particularly necessary. Started to think about how I might best go back over everything again, 
+> now that I have two working applications. Implementing further features to get them to a
+> <em>release version</em> prior to optimisation, which is going to be a job in itself.
