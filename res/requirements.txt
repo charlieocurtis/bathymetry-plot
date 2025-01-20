@@ -1,0 +1,7 @@
+numpy==2.2.2
+matplotlib==3.10.0
+customtkinter==5.2.2
+pillow==11.1.0
+dash==2.18.2
+plotly==6.0.0rc0
+dash-bootstrap-components==1.7.1
