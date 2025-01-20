@@ -6,6 +6,38 @@ from tkinter import *
 
 # class to hold relevant data collected from 'main'
 class PlotConfig:
+    """
+    Holds all information necessary for generating a plot and actioning customization requests from the user through the
+    GUI
+
+    Attributes:
+        active_file: str
+            The filepath of the currently selected dataset
+        file_data: np.ndarray(dtype=int)
+            Multidimensional numpy array of ints read from the data file
+        start_lat: float
+            The starting latitude of the plot
+        end_lat: float
+            The ending latitude of the plot
+        start_lon: float
+            The starting longitude of the plot
+        end_lon: float
+            The ending longitude of the plot
+        x_axis: list[float]
+            The values to be scaled against the x-axis of the plot (longitude)
+        y_axis: list[float]
+            The values to be scaled against the y-axis of the plot (latitude)
+        show_axis_labels: int
+            Represents the users request to see axis labels on the plot
+        plot_color: str
+            Plot color selected by the user
+        save_plot: str
+            Name of the file to be written should the use decide to save the plot as an image
+        save_plot_extension: str
+            File type of the saved plot
+        plot_type: int
+            Represents the users request regarding which type of plot they wish to view
+    """
     def __init__(self):
         self.active_file: str = ""
         self.file_data: np.ndarray = np.empty((0, 0), dtype=int)
@@ -34,14 +66,17 @@ plot_config = PlotConfig()
 
 
 def generate_plot_window():
-    global plot_config
     """
-    Function to generate a new window containing a matplot canvas and the plotted figure
+    Renders the window containing the generated plot to the user
 
     Parameters:
+        None
 
     Returns:
+        None
     """
+    global plot_config
+
     plot_window = Tk()
     plot_window.title('PLOT')
     plot_window.geometry("1100x800")
@@ -88,11 +123,13 @@ def generate_plot_window():
 
 def calculate_axis():
     """
-    Function to calculate the axis values based on the latitude and longitude of the data
+    Calculates the x and y axis values for the respective plot
 
     Parameters:
+        None
 
     Returns:
+        None
     """
     global plot_config
 

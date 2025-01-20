@@ -6,6 +6,28 @@ from dash import Dash, html, dcc, callback, Output, Input
 
 
 class PlotConfig:
+    """
+        Holds all information necessary for generating a plot and actioning customization requests from the user through the
+        GUI
+
+        Attributes:
+            filename: str
+                The filepath of the currently selected dataset
+            uploaded_data: np.ndarray(dtype=int)
+                Multidimensional numpy array of ints read from the data file
+            plot_types: list[str]
+                The plots currently available to the user to render
+            start_lat: float
+                The starting latitude of the plot
+            end_lat: float
+                The ending latitude of the plot
+            start_lon: float
+                The starting longitude of the plot
+            end_lon: float
+                The ending longitude of the plot
+            current_fig: go.Figure()
+                Current plot being displayed to the user
+        """
     def __init__(self):
         self.filename: str = ""
         self.uploaded_data: np.ndarray = np.empty((0, 0), dtype=int)
@@ -68,6 +90,17 @@ app.layout = dbc.Container([
     Input(component_id='dropdown_options', component_property='value')
 )
 def update_graph(plot_chosen):
+    """
+    Function that runs when changes are made to the 'figure' property of the dash-core-components Graph component
+
+    Parameters:
+        plot_chosen: str
+            Type of plot that the user has requested to view
+
+    Returns:
+        fig: go.Figure()
+            The figure to be displayed to the user - populated with data from the plot_config global
+    """
     if plot_chosen == '3D Surface':
         fig = go.Figure(go.Surface(z=plot_config.uploaded_data,
             x=np.linspace(plot_config.start_lon, plot_config.end_lon, num=plot_config.uploaded_data.shape[1]).tolist(),
@@ -94,6 +127,22 @@ def update_graph(plot_chosen):
      Input(component_id='upload_data_button', component_property='contents')]
 )
 def grab_data_from_file(filename, file_contents):
+    """
+    Retrieves and decodes the data pulled from the dash-core-components Input component, as well as saving the axis data
+
+    Parameters:
+        filename: str
+            The filename of the currently selected dataset
+        file_contents:
+            Binary data read from selected dataset
+
+    Returns:
+        plot_config.filename: str
+            See PlotConfig() attributes
+        np.array2string(plot_config.uploaded_data): str
+            A data snippet to be displayed to the user for quality assurance
+
+    """
     # grab the raw data itself
     plot_config.filename = filename
     decoded = base64.b64decode(str(file_contents)[37:]).decode('utf-8').strip().split('\n')
