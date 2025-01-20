@@ -55,7 +55,7 @@ located at ```~/data/gebco_2024_n52.8999_s52.15_w-4.7859_e-4.0361.asc```
 
 3. Install all dependencies required for the version of the application you wish to run. Alternatively, install them
 all.
-```pip install -r ../res/requirements.txt```
+```pip install -r ../res/requirements.txt```.
 The list of dependencies can be found in the [Packages](#packages) section.
 
 4. Run ```main.py``` for the native app, or ```dash_main.py``` for the web app.
