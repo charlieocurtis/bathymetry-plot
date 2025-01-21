@@ -44,7 +44,7 @@ plot_config = PlotConfig()
 
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 app = Dash(__name__, external_stylesheets=[dbc.themes.ZEPHYR, dbc_css,
-                                           'https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'])
+                                           'https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'],)
 
 
 # App layout
@@ -62,7 +62,7 @@ app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([
             html.H3("1. Upload File:"),
-            dcc.Upload(dbc.Button("Upload File", className="btn btn-primary"), id="upload_data_button"),
+            dcc.Upload(dbc.Button("Upload File", className="dbc"), id="upload_data_button"),
             html.Div(dcc.Markdown('''
                 Currently supported file types: 
                 
@@ -76,13 +76,13 @@ app.layout = dbc.Container([
             html.Br(),
             html.H3("3. Plot Type: "),
             dcc.Dropdown(options=plot_config.plot_types, id='dropdown_options'),
-        ], className="bg-primary bg-opacity-50 border border-primary border rounded-end", width=2),
+        ], className="dbc", id="options-bar", width=2),
         dbc.Col([
             dcc.Graph(figure={}, id='controls-and-graph', style={'height': '90vh'},
-                      className="dbc border border-primary border rounded"),
+                      className="dbc"),
         ], className="px-1", width=10),
     ], className="dbc"),
-], className="dbc text-dark", fluid=True)
+], className="dbc", fluid=True)
 
 
 @callback(
@@ -116,6 +116,7 @@ def update_graph(plot_chosen):
         plot_config.current_fig = fig
     else:
         fig = go.Figure()
+        fig.update_layout()
         plot_config.current_fig = fig
     return fig
 
