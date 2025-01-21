@@ -63,12 +63,11 @@ app.layout = dbc.Container([
         dbc.Col([
             html.H3("1. Upload File:"),
             dcc.Upload(dbc.Button("Upload File", className="dbc"), id="upload_data_button"),
+            html.Br(),
             html.Div(dcc.Markdown('''
-                Currently supported file types: 
-                
+                Currently supported file types:\n 
                 (.asc downloaded from [GEBCO](https://www.gebco.net/))
             ''')),
-            html.Br(),
             html.Div(id="uploaded_filename"),
             html.Br(),
             html.H3("2. Data Snippet:"),
