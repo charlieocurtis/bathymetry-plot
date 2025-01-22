@@ -55,10 +55,15 @@ located at ```~/data/gebco_2024_n52.8999_s52.15_w-4.7859_e-4.0361.asc```
 
 3. Install all dependencies required for the version of the application you wish to run. Alternatively, install them
 all.
-```pip install -r ../res/requirements.txt```.
+```pip install -r /res/requirements.txt```.
 The list of dependencies can be found in the [Packages](#packages) section.
 
 4. Run ```main.py``` for the native app, or ```dash_main.py``` for the web app.
+
+### Notes when trying to run
+- The project will  require a python3 version >= 3.8
+- The project was written on Windows, so make sure to change the line endings in your editor before trying to install
+dependencies.
 
 ## Packages
 Below, are the packages used to help create the project:
@@ -77,8 +82,9 @@ Packages **REQUIRED FOR NATIVE** version:
 Packages **REQUIRED FOR WEB** version:
 - dash - https://dash.plotly.com/installation
 - plotly - https://plotly.com/examples/
-- dash bootstrap components - https://dash-bootstrap-components.opensource.faculty.ai/
+- dash_bootstrap_components - https://dash-bootstrap-components.opensource.faculty.ai/
 - base64 - https://docs.python.org/3/library/base64.html
+- pandas - https://pandas.pydata.org/docs/# (required by plotly)
 
 ## Issues
 To maintain a distinction, issues have been marked with either an NA (Native Application) or WA (Web Application)
