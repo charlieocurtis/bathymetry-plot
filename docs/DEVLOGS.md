@@ -128,3 +128,9 @@ project.
 > wasn't particularly necessary. Started to think about how I might best go back over everything again, 
 > now that I have two working applications. Implementing further features to get them to a
 > <em>release version</em> prior to optimisation, which is going to be a job in itself.
+
+> ## 22/01/2025
+> A small(ish) day. I did a bit more styling for the web app. Importantly, I also tested the process described in the
+> "Running the Project" section of the README, I had to make a few changes to this as well as updating the README with
+> extra info that had been missed out. I also removed the annoying error that came up when running the app by adding a 
+> check to disallow strings of None datatype.
