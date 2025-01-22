@@ -45,7 +45,7 @@ plot_config = PlotConfig()
 
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 app = Dash(__name__, external_stylesheets=[dbc.themes.ZEPHYR, dbc_css,
-                                           'https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'],)
+                                'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Concert+One&display=swap'],)
 
 
 # App layout
@@ -78,7 +78,7 @@ app.layout = dbc.Container([
             dcc.Dropdown(options=plot_config.plot_types, id='dropdown_options'),
             html.Br(),
             html.H3("4. Colors: "),
-            dcc.Dropdown(options=px.colors.named_colorscales(), id='dropdown_colors'),
+            dcc.Dropdown(options=px.colors.named_colorscales(), id='dropdown_colors', maxHeight=120),
         ], className="dbc", id="options-bar", width=2),
         dbc.Col([
             dcc.Graph(figure={}, id='controls-and-graph', style={'height': '90vh'},
@@ -86,15 +86,6 @@ app.layout = dbc.Container([
         ], className="px-1", width=10),
     ], className="dbc"),
 ], className="dbc", fluid=True)
-
-
-# @callback(
-#     Output("controls-and-graph", "figure"),
-#     Input("dropdown_colors", "value")
-# )
-# def update_plot_color(selected_color):
-#     plot_config.current_fig.update_layout(color_continuous_scale=selected_color)
-#     return plot_config.current_fig
 
 
 @callback(
