@@ -3,7 +3,9 @@ import plotly.graph_objects as go
 import numpy as np
 import dash_bootstrap_components as dbc
 import plotly.express as px
+import flask
 from dash import Dash, html, dcc, callback, Output, Input
+
 
 
 class PlotConfig:
@@ -44,8 +46,10 @@ plot_config = PlotConfig()
 
 
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
-app = Dash(__name__, external_stylesheets=[dbc.themes.ZEPHYR, dbc_css,
-                                'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Concert+One&display=swap'],)
+server = flask.Flask(__name__)
+app = Dash(server=server, external_stylesheets=[dbc.themes.ZEPHYR, dbc_css,
+                                'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Concert+One&display=swap'],
+           routes_pathname_prefix='/dash/',)
 
 
 # App layout
@@ -175,5 +179,5 @@ def grab_data_from_file(filename, file_contents):
 
 # Run the app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run_server(debug=False)
 

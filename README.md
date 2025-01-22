@@ -85,6 +85,7 @@ Packages **REQUIRED FOR WEB** version:
 - dash_bootstrap_components - https://dash-bootstrap-components.opensource.faculty.ai/
 - base64 - https://docs.python.org/3/library/base64.html
 - pandas - https://pandas.pydata.org/docs/# (required by plotly)
+- flask - https://flask.palletsprojects.com/en/stable/
 
 ## Issues
 To maintain a distinction, issues have been marked with either an NA (Native Application) or WA (Web Application)
