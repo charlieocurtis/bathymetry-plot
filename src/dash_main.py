@@ -100,6 +100,8 @@ def update_graph(plot_chosen, color_chosen):
     Parameters:
         plot_chosen: str
             Type of plot that the user has requested to view
+        color_chosen: str
+            Colorscale that the user has requested the plot to be generated with
 
     Returns:
         fig: go.Figure()
@@ -151,21 +153,22 @@ def grab_data_from_file(filename, file_contents):
     """
     # grab the raw data itself
     plot_config.filename = filename
-    decoded = base64.b64decode(str(file_contents)[37:]).decode('utf-8').strip().split('\n')
-    plot_config.uploaded_data = np.loadtxt(decoded, dtype=int, skiprows=6)
+    if filename is not None:
+        decoded = base64.b64decode(str(file_contents)[37:]).decode('utf-8').strip().split('\n')
+        plot_config.uploaded_data = np.loadtxt(decoded, dtype=int, skiprows=6)
 
-    # grab the axis details from the filename
-    string_coords = plot_config.filename.split("/")[-1][11:][:-4].split("_")
-    float_coords = []
+        # grab the axis details from the filename
+        string_coords = plot_config.filename.split("/")[-1][11:][:-4].split("_")
+        float_coords = []
 
-    for coord in string_coords:
-        float_coords.append(float(coord[1:]))
+        for coord in string_coords:
+            float_coords.append(float(coord[1:]))
 
-    # set the axis bounds to plot_config
-    plot_config.start_lat = float_coords[0]
-    plot_config.end_lat = float_coords[1]
-    plot_config.start_lon = float_coords[2]
-    plot_config.end_lon = float_coords[3]
+        # set the axis bounds to plot_config
+        plot_config.start_lat = float_coords[0]
+        plot_config.end_lat = float_coords[1]
+        plot_config.start_lon = float_coords[2]
+        plot_config.end_lon = float_coords[3]
 
     return plot_config.filename, np.array2string(plot_config.uploaded_data)
 
