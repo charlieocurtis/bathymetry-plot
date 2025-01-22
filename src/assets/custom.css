@@ -37,3 +37,13 @@ h1 {
     border-color: white;
     border-radius: 5px;
 }
+
+#dropdown_options {
+    border-style: solid;
+    border-radius: 5px;
+}
+
+#dropdown_colors {
+    border-style: solid;
+    border-radius: 5px;
+}
