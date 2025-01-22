@@ -2,6 +2,7 @@ import base64
 import plotly.graph_objects as go
 import numpy as np
 import dash_bootstrap_components as dbc
+import plotly.express as px
 from dash import Dash, html, dcc, callback, Output, Input
 
 
@@ -75,6 +76,9 @@ app.layout = dbc.Container([
             html.Br(),
             html.H3("3. Plot Type: "),
             dcc.Dropdown(options=plot_config.plot_types, id='dropdown_options'),
+            html.Br(),
+            html.H3("4. Colors: "),
+            dcc.Dropdown(options=px.colors.named_colorscales(), id='dropdown_colors'),
         ], className="dbc", id="options-bar", width=2),
         dbc.Col([
             dcc.Graph(figure={}, id='controls-and-graph', style={'height': '90vh'},
@@ -84,11 +88,21 @@ app.layout = dbc.Container([
 ], className="dbc", fluid=True)
 
 
+# @callback(
+#     Output("controls-and-graph", "figure"),
+#     Input("dropdown_colors", "value")
+# )
+# def update_plot_color(selected_color):
+#     plot_config.current_fig.update_layout(color_continuous_scale=selected_color)
+#     return plot_config.current_fig
+
+
 @callback(
     Output(component_id='controls-and-graph', component_property='figure'),
-    Input(component_id='dropdown_options', component_property='value')
+    Input(component_id='dropdown_options', component_property='value'),
+    Input(component_id='dropdown_colors', component_property='value'),
 )
-def update_graph(plot_chosen):
+def update_graph(plot_chosen, color_chosen):
     """
     Function that runs when changes are made to the 'figure' property of the dash-core-components Graph component
 
@@ -103,20 +117,21 @@ def update_graph(plot_chosen):
     if plot_chosen == '3D Surface':
         fig = go.Figure(go.Surface(z=plot_config.uploaded_data,
             x=np.linspace(plot_config.start_lon, plot_config.end_lon, num=plot_config.uploaded_data.shape[1]).tolist(),
-            y=np.linspace(plot_config.start_lat, plot_config.end_lat, num=plot_config.uploaded_data.shape[0]).tolist()))
+            y=np.linspace(plot_config.start_lat, plot_config.end_lat, num=plot_config.uploaded_data.shape[0]).tolist(),
+                                   colorscale=color_chosen))
         fig.update_layout(
             scene=dict(xaxis_title = "Longitude", yaxis_title = "Latitude", zaxis_title = "Depth (m above sea-level)"))
-        plot_config.current_fig = fig
     elif plot_chosen == '2D Contour':
         fig = go.Figure(go.Contour(z=plot_config.uploaded_data,
             x=np.linspace(plot_config.start_lon, plot_config.end_lon, num=plot_config.uploaded_data.shape[1]).tolist(),
-            y=np.linspace(plot_config.start_lat, plot_config.end_lat, num=plot_config.uploaded_data.shape[0]).tolist()))
+            y=np.linspace(plot_config.start_lat, plot_config.end_lat, num=plot_config.uploaded_data.shape[0]).tolist(),
+                                   colorscale=color_chosen))
         fig.update_layout(xaxis_title = "Longitude", yaxis_title = "Latitude")
-        plot_config.current_fig = fig
     else:
         fig = go.Figure()
         fig.update_layout()
-        plot_config.current_fig = fig
+
+    plot_config.current_fig = fig
     return fig
 
 
