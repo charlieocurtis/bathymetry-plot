@@ -64,6 +64,7 @@ The list of dependencies can be found in the [Packages](#packages) section.
 - The project will  require a python3 version >= 3.8
 - The project was written on Windows, so make sure to change the line endings in your editor before trying to install
 dependencies.
+- For the web app: once running, got to ```localhost:8050/dash```.
 
 ## Packages
 Below, are the packages used to help create the project:
