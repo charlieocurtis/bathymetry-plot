@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import flask
 from dash import Dash, html, dcc, callback, Output, Input
-
+from sys import platform
 
 
 class PlotConfig:
@@ -158,8 +158,15 @@ def grab_data_from_file(filename, file_contents):
     # grab the raw data itself
     plot_config.filename = filename
     if filename is not None:
-        decoded = base64.b64decode(str(file_contents)[37:]).decode('utf-8').strip().split('\n')
-        plot_config.uploaded_data = np.loadtxt(decoded, dtype=int, skiprows=6)
+        # depending on the OS the line endings are different therefore the decoding process
+        #needs to be different
+        if platform == 'win32' or platform == 'darwin':
+            decoded = base64.b64decode(str(file_contents)[37:]).decode('utf-8').strip().split('\n')
+            plot_config.uploaded_data = np.loadtxt(decoded, dtype=int, skiprows=6)
+        elif platform == 'linux' or platform == 'linux2':
+            decoded = base64.b64decode(str(file_contents)[23:]).decode('utf-8').strip().split('\n')
+            plot_config.uploaded_data = np.loadtxt(decoded, dtype=int, skiprows=6)
+            print(decoded)
 
         # grab the axis details from the filename
         string_coords = plot_config.filename.split("/")[-1][11:][:-4].split("_")
@@ -179,5 +186,5 @@ def grab_data_from_file(filename, file_contents):
 
 # Run the app
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
 
