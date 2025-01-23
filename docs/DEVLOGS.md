@@ -138,4 +138,7 @@ project.
 > ## 23/01/2025
 > Spent the day setting up a linux environment on another machine to try and establish if the project works on that. The
 > native app does, however, because of the re-occurring issue with line endings, the web app does not. Because of the
-> line endings, the way the decoding works at the moment does not work on linux. 
+> line endings, the way the decoding works at the moment does not work on linux.
+> 
+> <em>UPDATE: I have since done this, it was not as challenging as I had previously thought and so now the web app works
+> on all three of the systems I have access to.</em>
