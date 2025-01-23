@@ -166,6 +166,7 @@ def grab_data_from_file(filename, file_contents):
         elif platform == 'linux' or platform == 'linux2':
             decoded = base64.b64decode(str(file_contents)[23:]).decode('utf-8').strip().split('\n')
             plot_config.uploaded_data = np.loadtxt(decoded, dtype=int, skiprows=6)
+            print(decoded)
 
         # grab the axis details from the filename
         string_coords = plot_config.filename.split("/")[-1][11:][:-4].split("_")
