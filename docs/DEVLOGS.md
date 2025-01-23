@@ -134,3 +134,8 @@ project.
 > "Running the Project" section of the README, I had to make a few changes to this as well as updating the README with
 > extra info that had been missed out. I also removed the annoying error that came up when running the app by adding a 
 > check to disallow strings of None datatype.
+
+> ## 23/01/2025
+> Spent the day setting up a linux environment on another machine to try and establish if the project works on that. The
+> native app does, however, because of the re-occurring issue with line endings, the web app does not. Because of the
+> line endings, the way the decoding works at the moment does not work on linux. 
