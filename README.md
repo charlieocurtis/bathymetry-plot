@@ -77,7 +77,7 @@ The list of dependencies can be found in the [Packages](#packages) section.
 > - The versions of Numpy and MatPlot listed in ```requirements.txt``` don't exist for mac. As such, if attempting to
 > run, the versions should be removed before running ```pip install ...``` (this issue is fixable).
 > - Secondly, Tkinter for Mac isn't working (at least on my machine) I receive a ```ModuleNotFoundError```. Something to
-> note when attempting to run the application. 
+> note when attempting to run the application. On MacOS, tkinter requires a manual installation via pip or homebrew.
 
 ## Packages
 Below, are the packages used to help create the project:
