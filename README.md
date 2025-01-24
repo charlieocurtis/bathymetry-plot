@@ -71,6 +71,14 @@ The list of dependencies can be found in the [Packages](#packages) section.
 > - Linux distros may require a separate installation for tkinter (python3) see [here.](https://stackoverflow.com/a/25905642/11895915)
 > - For the web app: once running, got to ```localhost:8050/dash```.
 
+> [!CAUTION]
+> ### MacOS
+> At present there are a few issues with Mac, that have resulted in me not being able to run the native application:
+> - The versions of Numpy and MatPlot listed in ```requirements.txt``` don't exist for mac. As such, if attempting to
+> run, the versions should be removed before running ```pip install ...``` (this issue is fixable).
+> - Secondly, Tkinter for Mac isn't working (at least on my machine) I receive a ```ModuleNotFoundError```. Something to
+> note when attempting to run the application. 
+
 ## Packages
 Below, are the packages used to help create the project:
 
