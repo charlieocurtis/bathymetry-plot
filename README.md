@@ -1,6 +1,8 @@
 # Bathymetry Plot
-This is an application to plot and visualise Bathymetric Data. Featuring a GUI with the hopes that the program will be
-applicable to other areas that benefit from 3D mapping and heat maps.
+This project aims to process bathymetric data (primarily), and present it in the form of a 3D model, as to capture the
+contouring, and shape of the ocean floor. The data is collected, processed and then run through plotting dependencies.
+The hope is that this makes 3D plotting software more accessible, but also, that these applications within this project
+may be used for other contexts, where 3D mapping is of a concern.
 
 ## Contents
 - [About](#about)
@@ -65,7 +67,7 @@ The list of dependencies can be found in the [Packages](#packages) section.
 > - The project will  require a python3 version >= 3.8
 > - The project was written on Windows, so make sure to change the line endings in your editor before trying to install
 >   dependencies.
-> - Linux distros may require a separate install for tkinter (python3) see [here.](https://stackoverflow.com/a/25905642/11895915)
+> - Linux distros may require a separate installation for tkinter (python3) see [here.](https://stackoverflow.com/a/25905642/11895915)
 > - For the web app: once running, got to ```localhost:8050/dash```.
 
 ## Packages
@@ -73,7 +75,6 @@ Below, are the packages used to help create the project:
 
 Packages **REQUIRED FOR BOTH** versions:
 - numpy - https://numpy.org/
-- pydoc - https://docs.python.org/3/library/pydoc.html
 
 Packages **REQUIRED FOR NATIVE** version:
 - matplot - https://matplotlib.org/stable/
