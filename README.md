@@ -2,7 +2,8 @@
 This project aims to process bathymetric data (primarily), and present it in the form of a 3D model, as to capture the
 contouring, and shape of the ocean floor. The data is collected, processed and then run through plotting dependencies.
 The hope is that this makes 3D plotting software more accessible, but also, that these applications within this project
-may be used for other contexts, where 3D mapping is of a concern.
+may be used for other contexts, where 3D mapping is of a concern, such as sub-surface geology and surface mapping - 
+(above sea level).
 
 ## Contents
 - [About](#about)
