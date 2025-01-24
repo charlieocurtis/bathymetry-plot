@@ -68,12 +68,6 @@ plot_config = PlotConfig()
 def generate_plot_window():
     """
     Renders the window containing the generated plot to the user
-
-    Parameters:
-        None
-
-    Returns:
-        None
     """
     global plot_config
 
@@ -123,13 +117,7 @@ def generate_plot_window():
 
 def calculate_axis():
     """
-    Calculates the x and y axis values for the respective plot
-
-    Parameters:
-        None
-
-    Returns:
-        None
+    Calculates the x and y-axis values for the respective plot
     """
     global plot_config
 

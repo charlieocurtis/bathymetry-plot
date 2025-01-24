@@ -29,12 +29,6 @@ def browse_files():
     """
     Generates the file explorer and displays a snippet of generated data to the user after calling
     read_data(file_location: str)
-
-    Parameters:
-        None
-
-    Returns:
-        None
     """
     plot.plot_config.active_file = filedialog.askopenfilename(initialdir="/",
                                                                title="Select a File",
@@ -51,12 +45,6 @@ def browse_files():
 def retrieve_coords():
     """
     Retrieves the latitude and longitude of the data set from the filename through string manipulation
-
-    Parameters:
-        None
-
-    Returns:
-        None
     """
     string_coords = plot.plot_config.active_file.split("/")[-1][11:][:-4].split("_")
     float_coords = []
@@ -73,12 +61,6 @@ def retrieve_coords():
 def set_custom_configs():
     """
     Helper function to assign attributes of plot_config: PlotConfig() from values collected using Tkinter UI logic
-
-    Parameters:
-        None
-
-    Returns:
-        None
     """
     plot.plot_config.show_axis_labels = axis_label_var.get()
     plot.plot_config.plot_color = option_menu_var.get()
