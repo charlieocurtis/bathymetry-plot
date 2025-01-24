@@ -142,3 +142,6 @@ project.
 > 
 > <em>UPDATE: I have since done this, it was not as challenging as I had previously thought and so now the web app works
 > on all three of the systems I have access to.</em>
+
+> ## 24/01/2025
+> Another admin day, sorting out commenting and generally docs. Attempted to fix issues with running on MacOS.
