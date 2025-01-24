@@ -60,12 +60,13 @@ The list of dependencies can be found in the [Packages](#packages) section.
 
 4. Run ```main.py``` for the native app, or ```dash_main.py``` for the web app.
 
-### Notes when trying to run
-- The project will  require a python3 version >= 3.8
-- The project was written on Windows, so make sure to change the line endings in your editor before trying to install
-dependencies.
-- Linux distros may require a separate install for tkinter (python3) see [here.](https://stackoverflow.com/a/25905642/11895915)
-- For the web app: once running, got to ```localhost:8050/dash```.
+> [!IMPORTANT]
+> ### Notes when trying to run
+> - The project will  require a python3 version >= 3.8
+> - The project was written on Windows, so make sure to change the line endings in your editor before trying to install
+> dependencies.
+> - Linux distros may require a separate install for tkinter (python3) see [here.](https://stackoverflow.com/a/25905642/11895915)
+> - For the web app: once running, got to ```localhost:8050/dash```.
 
 ## Packages
 Below, are the packages used to help create the project:
